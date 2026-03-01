@@ -3,7 +3,7 @@ requires = ["setuptools>=61.0", "setuptools-scm"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "munch-group-library"
+name = "slurm-code"
 version = "0.1.16"
 description = "Project description"
 authors = [
@@ -21,12 +21,12 @@ dependencies = [
 ]
 
 [project.urls]
-Homepage = "https://github.com/munch-group/munch-group-library"
-Repository = "https://github.com/munch-group/munch-group-library"
-Documentation = "https://munch-group.org/munch-group-library"
+Homepage = "https://github.com/munch-group/slurm-code"
+Repository = "https://github.com/munch-group/slurm-code"
+Documentation = "https://munch-group.org/slurm-code"
 
 [project.scripts]
-munch-group-library = "munch_group_library:munch_group_library"
+slurm-code = "slurm_code:slurm_code"
 
 [tool.setuptools]
 include-package-data = true
@@ -36,7 +36,7 @@ where = ["src"]
 exclude = ["test*"]
 
 [tool.setuptools.package-data]
-munch_group_library = ["data/*.txt", "data/*.csv", "data/*.pickle", "data/*.h5"]
+slurm_code = ["data/*.txt", "data/*.csv", "data/*.pickle", "data/*.h5"]
 
 [tool.pixi.workspace]
 channels = ["conda-forge", "munch-group"]
@@ -62,13 +62,13 @@ vscodenb = "*"
 r-rsvg = "*"
 
 # [tool.pixi.pypi-dependencies]
-# munch-group-library = { path = ".", editable = true }
+# slurm-code = { path = ".", editable = true }
 
 [tool.pixi.environments]
 default = {solve-group = "default"}
 
 [tool.pixi.tasks.init]
-cmd = "python ./scripts/rename.py && gh repo set-default https://github.com/munch-group/munch-group-library"
+cmd = "python ./scripts/rename.py && gh repo set-default https://github.com/munch-group/$(basename $(git rev-parse --show-toplevel)) && git add src/$(basename $(git rev-parse --show-toplevel)) && git add -u && gh lfs install && quarto publish gh-pages"
 
 [tool.pixi.tasks.install-dev]
 cmd = "XLA_FFI_INCLUDE_DIR=$(python -c 'from jax import ffi; print(ffi.include_dir())') pip install --no-build-isolation --force-reinstall --no-deps ."
