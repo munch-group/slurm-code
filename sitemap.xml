@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url>
+    <loc>https://munch-group.github.io/slurm-code/pages/example.html</loc>
+    <lastmod>2026-03-01T19:40:06.685Z</lastmod>
+  </url>
+  <url>
+    <loc>https://munch-group.github.io/slurm-code/api/scriptname.html</loc>
+    <lastmod>2026-03-01T19:42:46.280Z</lastmod>
+  </url>
+  <url>
+    <loc>https://munch-group.github.io/slurm-code/api/functionname.html</loc>
+    <lastmod>2026-03-01T19:42:46.280Z</lastmod>
+  </url>
+  <url>
+    <loc>https://munch-group.github.io/slurm-code/api/index.html</loc>
+    <lastmod>2026-03-01T19:42:46.280Z</lastmod>
+  </url>
+  <url>
+    <loc>https://munch-group.github.io/slurm-code/pages/overview.html</loc>
+    <lastmod>2026-03-01T19:42:46.280Z</lastmod>
+  </url>
+</urlset>

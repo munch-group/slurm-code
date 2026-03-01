@@ -35,9 +35,9 @@
   {
     "objectID": "api/scriptname.html",
     "href": "api/scriptname.html",
-    "title": "scriptname { #/Users/kmt/slurm_code.modulename.scriptname }",
+    "title": "scriptname",
     "section": "",
-    "text": "scriptname { #/Users/kmt/slurm_code.modulename.scriptname }\n/Users/kmt/slurm_code.modulename.scriptname()",
+    "text": "scriptname\nslurm_code.modulename.scriptname()",
     "crumbs": [
       "Some other section",
       "scriptname"
@@ -46,9 +46,9 @@
   {
     "objectID": "api/functionname.html",
     "href": "api/functionname.html",
-    "title": "functionname { #/Users/kmt/slurm_code.modulename.functionname }",
+    "title": "functionname",
     "section": "",
-    "text": "/Users/kmt/slurm_code.modulename.functionname(x=1, y=1)\nThe sum of two numbers.\n\n\n\nx : int = 1\n\nThe first number\n\ny : int = 1\n\nThe second number.\n\n\n\n\n\n\n : int\n\nSum of two numbers.\n\n\n\n\n\nAdding two numbers\nresult = foo(2, 4)\n\n\n\nlibraryname.modulename.scriptname",
+    "text": "slurm_code.modulename.functionname(x=1, y=1)\nThe sum of two numbers.\n\n\n\nx : int = 1\n\nThe first number\n\ny : int = 1\n\nThe second number.\n\n\n\n\n\n\n : int\n\nSum of two numbers.\n\n\n\n\n\nAdding two numbers\nresult = foo(2, 4)\n\n\n\nlibraryname.modulename.scriptname",
     "crumbs": [
       "Some section",
       "functionname"
@@ -57,7 +57,7 @@
   {
     "objectID": "api/functionname.html#parameters",
     "href": "api/functionname.html#parameters",
-    "title": "functionname { #/Users/kmt/slurm_code.modulename.functionname }",
+    "title": "functionname",
     "section": "",
     "text": "x : int = 1\n\nThe first number\n\ny : int = 1\n\nThe second number.",
     "crumbs": [
@@ -68,7 +68,7 @@
   {
     "objectID": "api/functionname.html#returns",
     "href": "api/functionname.html#returns",
-    "title": "functionname { #/Users/kmt/slurm_code.modulename.functionname }",
+    "title": "functionname",
     "section": "",
     "text": ": int\n\nSum of two numbers.",
     "crumbs": [
@@ -79,7 +79,7 @@
   {
     "objectID": "api/functionname.html#examples",
     "href": "api/functionname.html#examples",
-    "title": "functionname { #/Users/kmt/slurm_code.modulename.functionname }",
+    "title": "functionname",
     "section": "",
     "text": "Adding two numbers\nresult = foo(2, 4)",
     "crumbs": [
@@ -90,7 +90,7 @@
   {
     "objectID": "api/functionname.html#see-also",
     "href": "api/functionname.html#see-also",
-    "title": "functionname { #/Users/kmt/slurm_code.modulename.functionname }",
+    "title": "functionname",
     "section": "",
     "text": "libraryname.modulename.scriptname",
     "crumbs": [
@@ -133,7 +133,7 @@
     "href": "pages/overview.html",
     "title": "Overview",
     "section": "",
-    "text": "/Users/kmt/slurm-code lets you …\nLorem ipsum dolor sit amet, consectetur adipiscing elit. Duis sagittis posuere ligula sit amet lacinia. Duis dignissim pellentesque magna, rhoncus congue sapien finibus mollis. Ut eu sem laoreet, vehicula ipsum in, convallis erat. Vestibulum magna sem, blandit pulvinar augue sit amet, auctor malesuada sapien. Nullam faucibus leo eget eros hendrerit, non laoreet ipsum lacinia. Curabitur cursus diam elit, non tempus ante volutpat a. Quisque hendrerit blandit purus non fringilla. Integer sit amet elit viverra ante dapibus semper. Vestibulum viverra rutrum enim, at luctus enim posuere eu. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.",
+    "text": "slurm-code lets you …\nLorem ipsum dolor sit amet, consectetur adipiscing elit. Duis sagittis posuere ligula sit amet lacinia. Duis dignissim pellentesque magna, rhoncus congue sapien finibus mollis. Ut eu sem laoreet, vehicula ipsum in, convallis erat. Vestibulum magna sem, blandit pulvinar augue sit amet, auctor malesuada sapien. Nullam faucibus leo eget eros hendrerit, non laoreet ipsum lacinia. Curabitur cursus diam elit, non tempus ante volutpat a. Quisque hendrerit blandit purus non fringilla. Integer sit amet elit viverra ante dapibus semper. Vestibulum viverra rutrum enim, at luctus enim posuere eu. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.",
     "crumbs": [
       "Overview"
     ]
@@ -143,7 +143,7 @@
     "href": "pages/overview.html#installation",
     "title": "Overview",
     "section": "Installation",
-    "text": "Installation\n\npixicondapip\n\n\npixi workspace channel add munch-group\npixi add /Users/kmt/slurm-code\n\n\nconda install -c munch-group /Users/kmt/slurm-code\n\n\npip install /Users/kmt/slurm-code",
+    "text": "Installation\n\npixicondapip\n\n\npixi workspace channel add munch-group\npixi add slurm-code\n\n\nconda install -c munch-group slurm-code\n\n\npip install slurm-code",
     "crumbs": [
       "Overview"
     ]
@@ -163,7 +163,7 @@
     "href": "pages/overview.html#some-use-case",
     "title": "Overview",
     "section": "Some use case",
-    "text": "Some use case\nThe functionname function does … /Users/kmt/slurm_code.modulename.functionname does … functionname does …\nLorem ipsum dolor sit amet, consectetur adipiscing elit. Duis sagittis posuere ligula sit amet lacinia. Duis dignissim pellentesque magna, rhoncus congue sapien finibus mollis. Ut eu sem laoreet, vehicula ipsum in, convallis erat. Vestibulum magna sem, blandit pulvinar augue sit amet, auctor malesuada sapien. Nullam faucibus leo eget eros hendrerit, non laoreet ipsum lacinia. Curabitur cursus diam elit, non tempus ante volutpat a. Quisque hendrerit blandit purus non fringilla. Integer sit amet elit viverra ante dapibus semper. Vestibulum viverra rutrum enim, at luctus enim posuere eu. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.\n\n# from /Users/kmt/slurm_code.modulename import functionname\n# functionname(3, 4)\n\nLorem ipsum dolor sit amet, consectetur adipiscing elit. Duis sagittis posuere ligula sit amet lacinia. Duis dignissim pellentesque magna, rhoncus congue sapien finibus mollis. Ut eu sem laoreet, vehicula ipsum in, convallis erat. Vestibulum magna sem, blandit pulvinar augue sit amet, auctor malesuada sapien. Nullam faucibus leo eget eros hendrerit, non laoreet ipsum lacinia. Curabitur cursus diam elit, non tempus ante volutpat a. Quisque hendrerit blandit purus non fringilla. Integer sit amet elit viverra ante dapibus semper. Vestibulum viverra rutrum enim, at luctus enim posuere eu. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.\ncontents:\n  - MdRenderer\nLorem ipsum dolor sit amet, consectetur adipiscing elit. Duis sagittis posuere ligula sit amet lacinia. Duis dignissim pellentesque magna, rhoncus congue sapien finibus mollis. Ut eu sem laoreet, vehicula ipsum in, convallis erat. Vestibulum magna sem, blandit pulvinar augue sit amet, auctor malesuada sapien. Nullam faucibus leo eget eros hendrerit, non laoreet ipsum lacinia. Curabitur cursus diam elit, non tempus ante volutpat a. Quisque hendrerit blandit purus non fringilla. Integer sit amet elit viverra ante dapibus semper. Vestibulum viverra rutrum enim, at luctus enim posuere eu. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.",
+    "text": "Some use case\nThe functionname function does … slurm_code.modulename.functionname does … functionname does …\nLorem ipsum dolor sit amet, consectetur adipiscing elit. Duis sagittis posuere ligula sit amet lacinia. Duis dignissim pellentesque magna, rhoncus congue sapien finibus mollis. Ut eu sem laoreet, vehicula ipsum in, convallis erat. Vestibulum magna sem, blandit pulvinar augue sit amet, auctor malesuada sapien. Nullam faucibus leo eget eros hendrerit, non laoreet ipsum lacinia. Curabitur cursus diam elit, non tempus ante volutpat a. Quisque hendrerit blandit purus non fringilla. Integer sit amet elit viverra ante dapibus semper. Vestibulum viverra rutrum enim, at luctus enim posuere eu. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.\n\n# from slurm_code.modulename import functionname\n# functionname(3, 4)\n\nLorem ipsum dolor sit amet, consectetur adipiscing elit. Duis sagittis posuere ligula sit amet lacinia. Duis dignissim pellentesque magna, rhoncus congue sapien finibus mollis. Ut eu sem laoreet, vehicula ipsum in, convallis erat. Vestibulum magna sem, blandit pulvinar augue sit amet, auctor malesuada sapien. Nullam faucibus leo eget eros hendrerit, non laoreet ipsum lacinia. Curabitur cursus diam elit, non tempus ante volutpat a. Quisque hendrerit blandit purus non fringilla. Integer sit amet elit viverra ante dapibus semper. Vestibulum viverra rutrum enim, at luctus enim posuere eu. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.\ncontents:\n  - MdRenderer\nLorem ipsum dolor sit amet, consectetur adipiscing elit. Duis sagittis posuere ligula sit amet lacinia. Duis dignissim pellentesque magna, rhoncus congue sapien finibus mollis. Ut eu sem laoreet, vehicula ipsum in, convallis erat. Vestibulum magna sem, blandit pulvinar augue sit amet, auctor malesuada sapien. Nullam faucibus leo eget eros hendrerit, non laoreet ipsum lacinia. Curabitur cursus diam elit, non tempus ante volutpat a. Quisque hendrerit blandit purus non fringilla. Integer sit amet elit viverra ante dapibus semper. Vestibulum viverra rutrum enim, at luctus enim posuere eu. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.",
     "crumbs": [
       "Overview"
     ]
