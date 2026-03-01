@@ -61,26 +61,14 @@ nbdime = ">=4.0.2,<5"
 vscodenb = "*"
 r-rsvg = "*"
 
-
-[tool.pixi.workspace]
-channels = ["conda-forge", "munch-group"]
-platforms = ["osx-arm64", "osx-64", "linux-64"]
-
-[tool.pixi.pypi-dependencies]
-geneinfo = { path = ".", editable = true }
-
-[tool.pixi.dependencies]
-pip = "*"
-pytables = "*"
-quartodoc = "*"
-geneinfo = "*"
-
+# [tool.pixi.pypi-dependencies]
+# munch-group-library = { path = ".", editable = true }
 
 [tool.pixi.environments]
 default = {solve-group = "default"}
 
 [tool.pixi.tasks.init]
-cmd = "python ./scripts/rename.py && gh repo set-default https://github.com/munch-group/{{new_name}}"
+cmd = "python ./scripts/rename.py && gh repo set-default https://github.com/munch-group/munch-group-library"
 
 [tool.pixi.tasks.install-dev]
 cmd = "XLA_FFI_INCLUDE_DIR=$(python -c 'from jax import ffi; print(ffi.include_dir())') pip install --no-build-isolation --force-reinstall --no-deps ."
