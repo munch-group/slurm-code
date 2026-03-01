@@ -33,17 +33,6 @@
     ]
   },
   {
-    "objectID": "api/scriptname.html",
-    "href": "api/scriptname.html",
-    "title": "scriptname",
-    "section": "",
-    "text": "scriptname\nslurm_code.modulename.scriptname()",
-    "crumbs": [
-      "Some other section",
-      "scriptname"
-    ]
-  },
-  {
     "objectID": "api/functionname.html",
     "href": "api/functionname.html",
     "title": "functionname",
@@ -126,6 +115,17 @@
     "text": "Some description…\n\n\n\nscriptname",
     "crumbs": [
       "Function reference"
+    ]
+  },
+  {
+    "objectID": "api/scriptname.html",
+    "href": "api/scriptname.html",
+    "title": "scriptname",
+    "section": "",
+    "text": "scriptname\nslurm_code.modulename.scriptname()",
+    "crumbs": [
+      "Some other section",
+      "scriptname"
     ]
   },
   {
