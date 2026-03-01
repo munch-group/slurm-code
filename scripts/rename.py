@@ -4,7 +4,7 @@ import argparse
 import os
 import shutil
 from pathlib import Path
-import subprocesss
+import subprocess
 
 def convert_to_underscore(name: str) -> str:
     """Convert hyphenated name to underscore format."""
@@ -42,7 +42,7 @@ def find_and_replace_in_file(file_path: Path, old_hyphen: str, new_hyphen: str,
 
 
 def rename_library(new_name: str):
-    """Rename the library from munch-group-library to the new name."""
+    """Rename the library from /Users/kmt/slurm-code to the new name."""
     old_hyphen = "munch-group-library"
     old_underscore = "munch_group_library"
 
@@ -63,10 +63,9 @@ def rename_library(new_name: str):
     # Walk through all files in the project
     for root, dirs, files in os.walk(project_root):
         # Skip certain directories
-        dirs[:] = [d for d in dirs if d not in ['.git', '__pycache__', '.pytest_cache',
+        dirs[:] = [d for d in dirs if d not in ['scripts', '.git', '.pixi', '__pycache__', '.pytest_cache',
                                                   'node_modules', '.venv', 'venv', 'dist',
                                                   'build', '*.egg-info', '.ipynb_checkpoints']]
-
         for file in files:
             file_path = Path(root) / file
             if find_and_replace_in_file(file_path, old_hyphen, new_hyphen,
@@ -99,7 +98,8 @@ def rename_library(new_name: str):
 
 def main():
 
-    git_executable = shutil.which('git')
+    import sys
+    from subprocess import CalledProcessError
 
     cmd = 'git rev-parse --show-toplevel'.split()
     cmd[0] = shutil.which(cmd[0])
@@ -107,16 +107,18 @@ def main():
         print('A git executable was not found', file=sys.stderr)
         sys.exit(1)
     try:
-        new_name = subprocess.check_output(cmd)
+        path = subprocess.check_output(cmd).decode()
     except CalledProcessError:
         print('Could not get repo name using git', file=sys.stderr)
         sys.exit(1)
+
+    new_name = Path(path).name
 
     new_name = new_name.strip()
     if not new_name:
         print("Library name cannot be empty", file=sys.stderr)
 
-    rename_library(new_name)
+    # rename_library(new_name)
 
     # Confirm with user
     print(f"\nThis will rename 'munch-group-library' to '{new_name}' throughout the project.")
