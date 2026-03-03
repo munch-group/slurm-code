@@ -1,2 +1,3 @@
+from slurm_code.cli import slurm_code
 
-from .modulename import functionname
+__all__ = ["slurm_code"]

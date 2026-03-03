@@ -50,14 +50,14 @@ website:
         href: https://github.com/munch-group/slurm-code/
   sidebar:
     - id: pages
-      title: Get Started
+      title: Guide
       style: floating
       align: left
       contents:
-        - pages/overview.ipynb
-        - section: "Examples"
-          contents:
-            - pages/example.ipynb                   
+        - pages/getting-started.md
+        - pages/submit.md
+        - pages/profiles.md
+        - pages/managing-jobs.md
 
 lightbox: true
 
