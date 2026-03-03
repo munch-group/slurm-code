@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Overview – slurm-code</title>
+<title>Submit Profiles – slurm-code</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -65,6 +65,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../">
+<link href="../pages/managing-jobs.html" rel="next">
+<link href="../pages/submit.html" rel="prev">
 <script src="../site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
 <script src="../site_libs/quarto-html/axe/axe-check.js" type="module"></script>
@@ -109,7 +111,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link rel="stylesheet" href="../styles.css">
 </head>
 
-<body class="nav-fixed quarto-light">
+<body class="nav-sidebar floating nav-fixed quarto-light">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
@@ -143,20 +145,64 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
       </div> <!-- /container-fluid -->
     </nav>
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../pages/profiles.html">Submit Profiles</a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+    </div>
+  </nav>
 </header>
 <!-- content -->
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../pages/getting-started.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Getting Started</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../pages/submit.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Submitting Jobs</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../pages/profiles.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">Submit Profiles</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../pages/managing-jobs.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Managing Jobs</span></a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
         <nav id="TOC" role="doc-toc" class="toc-active">
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#installation" id="toc-installation" class="nav-link active" data-scroll-target="#installation">Installation</a></li>
-  <li><a href="#basic-use" id="toc-basic-use" class="nav-link" data-scroll-target="#basic-use">Basic use</a></li>
-  <li><a href="#some-use-case" id="toc-some-use-case" class="nav-link" data-scroll-target="#some-use-case">Some use case</a></li>
-  <li><a href="#learning-more" id="toc-learning-more" class="nav-link" data-scroll-target="#learning-more">Learning more</a></li>
+  <li><a href="#config-file-location" id="toc-config-file-location" class="nav-link active" data-scroll-target="#config-file-location">Config file location</a></li>
+  <li><a href="#config-file-format" id="toc-config-file-format" class="nav-link" data-scroll-target="#config-file-format">Config file format</a></li>
+  <li><a href="#valid-keys" id="toc-valid-keys" class="nav-link" data-scroll-target="#valid-keys">Valid keys</a></li>
+  <li><a href="#precedence" id="toc-precedence" class="nav-link" data-scroll-target="#precedence">Precedence</a></li>
+  <li><a href="#using-profiles" id="toc-using-profiles" class="nav-link" data-scroll-target="#using-profiles">Using profiles</a></li>
+  <li><a href="#viewing-profiles" id="toc-viewing-profiles" class="nav-link" data-scroll-target="#viewing-profiles">Viewing profiles</a></li>
+  <li><a href="#error-handling" id="toc-error-handling" class="nav-link" data-scroll-target="#error-handling">Error handling</a></li>
   </ul>
 </nav>
     </div>
@@ -165,7 +211,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Overview</h1>
+<h1 class="title">Submit Profiles</h1>
 </div>
 
 
@@ -182,49 +228,180 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<p><strong>slurm-code</strong> lets you …</p>
-<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis sagittis posuere ligula sit amet lacinia. Duis dignissim pellentesque magna, rhoncus congue sapien finibus mollis. Ut eu sem laoreet, vehicula ipsum in, convallis erat. Vestibulum magna sem, blandit pulvinar augue sit amet, auctor malesuada sapien. Nullam faucibus leo eget eros hendrerit, non laoreet ipsum lacinia. Curabitur cursus diam elit, non tempus ante volutpat a. Quisque hendrerit blandit purus non fringilla. Integer sit amet elit viverra ante dapibus semper. Vestibulum viverra rutrum enim, at luctus enim posuere eu. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.</p>
-<section id="installation" class="level2">
-<h2 class="anchored" data-anchor-id="installation">Installation</h2>
-<div class="tabset-margin-container"></div><div class="panel-tabset">
-<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-1-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-1" role="tab" aria-controls="tabset-1-1" aria-selected="true" href="">pixi</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-2" role="tab" aria-controls="tabset-1-2" aria-selected="false" href="">conda</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-3-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-3" role="tab" aria-controls="tabset-1-3" aria-selected="false" href="">pip</a></li></ul>
-<div class="tab-content">
-<div id="tabset-1-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-1-1-tab">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">pixi</span> workspace channel add munch-group</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="ex">pixi</span> add slurm-code</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</div>
-<div id="tabset-1-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-2-tab">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> install <span class="at">-c</span> munch-group slurm-code</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</div>
-<div id="tabset-1-3" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-3-tab">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="ex">pip</span> install slurm-code</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</div>
-</div>
-</div>
+<p>Submit profiles let you save frequently used job configurations in a config file and apply them with <code>--profile &lt;name&gt;</code>, similar to SSH config host entries.</p>
+<section id="config-file-location" class="level2">
+<h2 class="anchored" data-anchor-id="config-file-location">Config file location</h2>
+<p>The config file is located at:</p>
+<pre><code>~/.slurm-code/config.ini</code></pre>
+<p>You can override this by setting the <code>SLURM_CODE_CONFIG</code> environment variable:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="bu">export</span> <span class="va">SLURM_CODE_CONFIG</span><span class="op">=</span>~/my-custom-config.ini</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
-<section id="basic-use" class="level2">
-<h2 class="anchored" data-anchor-id="basic-use">Basic use</h2>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</section>
-<section id="some-use-case" class="level2">
-<h2 class="anchored" data-anchor-id="some-use-case">Some use case</h2>
-<p>The <a href="../api/functionname.html#slurm_code.modulename.functionname">functionname function</a> does … <a href="../api/functionname.html#slurm_code.modulename.functionname"><code>slurm_code.modulename.functionname</code></a> does … <a href="../api/functionname.html#slurm_code.modulename.functionname"><code>functionname</code></a> does …</p>
-<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis sagittis posuere ligula sit amet lacinia. Duis dignissim pellentesque magna, rhoncus congue sapien finibus mollis. Ut eu sem laoreet, vehicula ipsum in, convallis erat. Vestibulum magna sem, blandit pulvinar augue sit amet, auctor malesuada sapien. Nullam faucibus leo eget eros hendrerit, non laoreet ipsum lacinia. Curabitur cursus diam elit, non tempus ante volutpat a. Quisque hendrerit blandit purus non fringilla. Integer sit amet elit viverra ante dapibus semper. Vestibulum viverra rutrum enim, at luctus enim posuere eu. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.</p>
-<div id="cell-2" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2025-12-19T10:49:18.325514Z&quot;,&quot;iopub.status.busy&quot;:&quot;2025-12-19T10:49:18.325385Z&quot;,&quot;iopub.status.idle&quot;:&quot;2025-12-19T10:49:18.328136Z&quot;,&quot;shell.execute_reply&quot;:&quot;2025-12-19T10:49:18.327679Z&quot;}}" data-execution_count="1">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># from slurm_code.modulename import functionname</span></span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="co"># functionname(3, 4)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</div>
-<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis sagittis posuere ligula sit amet lacinia. Duis dignissim pellentesque magna, rhoncus congue sapien finibus mollis. Ut eu sem laoreet, vehicula ipsum in, convallis erat. Vestibulum magna sem, blandit pulvinar augue sit amet, auctor malesuada sapien. Nullam faucibus leo eget eros hendrerit, non laoreet ipsum lacinia. Curabitur cursus diam elit, non tempus ante volutpat a. Quisque hendrerit blandit purus non fringilla. Integer sit amet elit viverra ante dapibus semper. Vestibulum viverra rutrum enim, at luctus enim posuere eu. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">contents</span><span class="kw">:</span></span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> MdRenderer</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis sagittis posuere ligula sit amet lacinia. Duis dignissim pellentesque magna, rhoncus congue sapien finibus mollis. Ut eu sem laoreet, vehicula ipsum in, convallis erat. Vestibulum magna sem, blandit pulvinar augue sit amet, auctor malesuada sapien. Nullam faucibus leo eget eros hendrerit, non laoreet ipsum lacinia. Curabitur cursus diam elit, non tempus ante volutpat a. Quisque hendrerit blandit purus non fringilla. Integer sit amet elit viverra ante dapibus semper. Vestibulum viverra rutrum enim, at luctus enim posuere eu. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.</p>
-</section>
-<section id="learning-more" class="level2">
-<h2 class="anchored" data-anchor-id="learning-more">Learning more</h2>
-<p>Go <a href="../pages/overview.html">to the anvanced page</a> to learn how to …</p>
+<section id="config-file-format" class="level2">
+<h2 class="anchored" data-anchor-id="config-file-format">Config file format</h2>
+<p>The file uses INI format (parsed by Python’s <code>configparser</code>). The special <code>[DEFAULT]</code> section provides base values inherited by all named profiles.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode ini code-with-copy"><code class="sourceCode ini"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="kw">[DEFAULT]</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="dt">account </span><span class="ot">=</span><span class="st"> my_account</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="dt">mem_per_cpu </span><span class="ot">=</span><span class="st"> 8g</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="kw">[standard]</span></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="dt">walltime </span><span class="ot">=</span><span class="st"> 08:00:00</span></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a><span class="kw">[gpu]</span></span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a><span class="dt">partition </span><span class="ot">=</span><span class="st"> gpu</span></span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a><span class="dt">cpus_per_gpu </span><span class="ot">=</span><span class="st"> </span><span class="dv">4</span></span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a><span class="dt">mem_per_cpu </span><span class="ot">=</span><span class="st"> 16g</span></span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a><span class="dt">walltime </span><span class="ot">=</span><span class="st"> 12:00:00</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>In this example:</p>
 <ul>
-<li><a href="../pages/overview.html">Examples page</a>: sites using quartodoc.</li>
+<li><strong><code>[DEFAULT]</code></strong> sets <code>account</code> and <code>mem_per_cpu</code> for all profiles</li>
+<li><strong><code>[standard]</code></strong> inherits both defaults and adds a walltime</li>
+<li><strong><code>[gpu]</code></strong> inherits <code>account</code> from DEFAULT, overrides <code>mem_per_cpu</code>, and adds GPU-specific settings</li>
 </ul>
+</section>
+<section id="valid-keys" class="level2">
+<h2 class="anchored" data-anchor-id="valid-keys">Valid keys</h2>
+<p>Profile keys use the same names as the CLI options (with underscores instead of hyphens):</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Key</th>
+<th>Corresponding option</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>account</code></td>
+<td><code>--account</code></td>
+</tr>
+<tr class="even">
+<td><code>cpus_per_task</code></td>
+<td><code>--cpus-per-task</code></td>
+</tr>
+<tr class="odd">
+<td><code>cpus_per_gpu</code></td>
+<td><code>--cpus-per-gpu</code></td>
+</tr>
+<tr class="even">
+<td><code>error</code></td>
+<td><code>--error</code></td>
+</tr>
+<tr class="odd">
+<td><code>exclude</code></td>
+<td><code>--exclude</code></td>
+</tr>
+<tr class="even">
+<td><code>job_name</code></td>
+<td><code>--job-name</code></td>
+</tr>
+<tr class="odd">
+<td><code>mem</code></td>
+<td><code>--mem</code></td>
+</tr>
+<tr class="even">
+<td><code>mem_per_cpu</code></td>
+<td><code>--mem-per-cpu</code></td>
+</tr>
+<tr class="odd">
+<td><code>mincpus</code></td>
+<td><code>--mincpus</code></td>
+</tr>
+<tr class="even">
+<td><code>no_requeue</code></td>
+<td><code>--no-requeue</code></td>
+</tr>
+<tr class="odd">
+<td><code>nodes</code></td>
+<td><code>--nodes</code></td>
+</tr>
+<tr class="even">
+<td><code>nodelist</code></td>
+<td><code>--nodelist</code></td>
+</tr>
+<tr class="odd">
+<td><code>ntasks</code></td>
+<td><code>--ntasks</code></td>
+</tr>
+<tr class="even">
+<td><code>ntasks_per_node</code></td>
+<td><code>--ntasks-per-node</code></td>
+</tr>
+<tr class="odd">
+<td><code>oom_kill_step</code></td>
+<td><code>--oom-kill-step</code></td>
+</tr>
+<tr class="even">
+<td><code>partition</code></td>
+<td><code>--partition</code></td>
+</tr>
+<tr class="odd">
+<td><code>requeue</code></td>
+<td><code>--requeue</code></td>
+</tr>
+<tr class="even">
+<td><code>thread_spec</code></td>
+<td><code>--thread-spec</code></td>
+</tr>
+<tr class="odd">
+<td><code>use_min_nodes</code></td>
+<td><code>--use-min-nodes</code></td>
+</tr>
+<tr class="even">
+<td><code>walltime</code></td>
+<td><code>--walltime</code></td>
+</tr>
+</tbody>
+</table>
+<p>Boolean keys (<code>no_requeue</code>, <code>requeue</code>, <code>use_min_nodes</code>) accept <code>true</code>/<code>false</code>, <code>yes</code>/<code>no</code>, or <code>1</code>/<code>0</code>.</p>
+</section>
+<section id="precedence" class="level2">
+<h2 class="anchored" data-anchor-id="precedence">Precedence</h2>
+<p>When a profile is active, values are resolved in this order (highest priority first):</p>
+<ol type="1">
+<li><strong>CLI flags</strong> – explicitly typed on the command line</li>
+<li><strong>Profile values</strong> – from the named section (including inherited <code>[DEFAULT]</code> values)</li>
+<li><strong>Click defaults</strong> – the hardcoded defaults (<code>--cpus-per-task 1</code>, <code>--mem-per-cpu 8g</code>, etc.)</li>
+</ol>
+<p>This means you can always override any profile setting from the command line:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Uses gpu profile but overrides the walltime</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="ex">slurm-code</span> submit <span class="at">-P</span> gpu <span class="at">-t</span> 24:00:00 ~/my-project</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="using-profiles" class="level2">
+<h2 class="anchored" data-anchor-id="using-profiles">Using profiles</h2>
+<p>Apply a profile with <code>-P</code> / <code>--profile</code>:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="ex">slurm-code</span> submit <span class="at">-P</span> standard ~/my-project</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="ex">slurm-code</span> submit <span class="at">-P</span> gpu ~/my-project</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Without <code>--profile</code>, only <code>[DEFAULT]</code> values are applied (if the config file exists).</p>
+</section>
+<section id="viewing-profiles" class="level2">
+<h2 class="anchored" data-anchor-id="viewing-profiles">Viewing profiles</h2>
+<p>The <code>profiles</code> command shows the config file path and all defined profiles with their effective settings:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="ex">slurm-code</span> profiles</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Example output:</p>
+<pre><code>Config file: /home/user/.slurm-code/config.ini
+
+[DEFAULT]
+  account = my_account
+  mem_per_cpu = 8g
+
+[standard]
+  walltime = 08:00:00
+  account = my_account
+  mem_per_cpu = 8g
+
+[gpu]
+  partition = gpu
+  cpus_per_gpu = 4
+  mem_per_cpu = 16g
+  walltime = 12:00:00
+  account = my_account</code></pre>
+<p>Named sections show all effective values, including those inherited from <code>[DEFAULT]</code>.</p>
+</section>
+<section id="error-handling" class="level2">
+<h2 class="anchored" data-anchor-id="error-handling">Error handling</h2>
+<p>Requesting a profile that doesn’t exist shows an error with the available profiles:</p>
+<pre><code>Error: Unknown profile 'fast'. Available: standard, gpu</code></pre>
+<p>Using an invalid key in the config file also produces a clear error:</p>
+<pre><code>Error: Invalid key(s) in profile: invalid_key</code></pre>
 
 
 </section>
@@ -630,6 +807,18 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     }
   });
   </script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="../pages/submit.html" class="pagination-link" aria-label="Submitting Jobs">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Submitting Jobs</span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="../pages/managing-jobs.html" class="pagination-link" aria-label="Managing Jobs">
+        <span class="nav-page-text">Managing Jobs</span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
 </div> <!-- /content -->
 
 

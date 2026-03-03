@@ -1,35 +1,123 @@
 [
   {
+    "objectID": "pages/managing-jobs.html",
+    "href": "pages/managing-jobs.html",
+    "title": "Managing Jobs",
+    "section": "",
+    "text": "slurm-code provides commands to list, cancel, and reconnect to jobs that were submitted through slurm-code submit. These commands identify managed jobs by their sc- name prefix.",
+    "crumbs": [
+      "Managing Jobs"
+    ]
+  },
+  {
+    "objectID": "pages/managing-jobs.html#listing-jobs",
+    "href": "pages/managing-jobs.html#listing-jobs",
+    "title": "Managing Jobs",
+    "section": "Listing jobs",
+    "text": "Listing jobs\nThe jobs command shows your running slurm-code jobs:\nslurm-code jobs\nExample output:\n     JOBID  NAME                            PARTITION     REQMEM    CPUS    TIMELIMIT     ELAPSED       STATE\n----------------------------------------------------------------------------------------------------------\n   1234567  sc-my-project                   normal        8Gn       1       08:00:00      01:23:45      RUNNING\n   1234568  sc-analysis                     normal        16Gn      4       12:00:00      00:45:12      RUNNING\n\nOptions\n\n\n\nOption\nDescription\n\n\n\n\n--all-states\nInclude PENDING jobs (default: RUNNING only)\n\n\n\nTo also see pending jobs:\nslurm-code jobs --all-states",
+    "crumbs": [
+      "Managing Jobs"
+    ]
+  },
+  {
+    "objectID": "pages/managing-jobs.html#cancelling-jobs",
+    "href": "pages/managing-jobs.html#cancelling-jobs",
+    "title": "Managing Jobs",
+    "section": "Cancelling jobs",
+    "text": "Cancelling jobs\nThe cancel command cancels slurm-code managed jobs.\n\nCancel by job ID\nslurm-code cancel 1234567\n\n\nCancel by name\nYou can use the directory basename (without the sc- prefix):\nslurm-code cancel my-project\nOr the full job name:\nslurm-code cancel sc-my-project\n\n\nCancel all jobs\nslurm-code cancel --all\n\n\nOptions\n\n\n\nArgument/Option\nDescription\n\n\n\n\nJOB_ID_OR_NAME\nA job ID (numeric) or job name to cancel\n\n\n--all\nCancel all slurm-code managed jobs",
+    "crumbs": [
+      "Managing Jobs"
+    ]
+  },
+  {
+    "objectID": "pages/managing-jobs.html#reconnecting-to-a-job",
+    "href": "pages/managing-jobs.html#reconnecting-to-a-job",
+    "title": "Managing Jobs",
+    "section": "Reconnecting to a job",
+    "text": "Reconnecting to a job\nIf VSCode disconnects or you close the window, use reconnect to reopen it on the same node:\nslurm-code reconnect ~/my-project\nThis finds the running job that matches the directory name and opens VSCode on its allocated node. Relative paths are resolved relative to $HOME.\nIf multiple jobs match the directory name, you’ll be prompted to select one:\nMultiple matching jobs found:\n  [1] 1234567  01:23:45  RUNNING\n  [2] 1234568  00:45:12  RUNNING\nSelect job number:\n\nUsage\nslurm-code reconnect DIRECTORY\n\n\n\nArgument\nDescription\n\n\n\n\nDIRECTORY\nPath on the remote host (used to match the job name)",
+    "crumbs": [
+      "Managing Jobs"
+    ]
+  },
+  {
     "objectID": "pages/example.html",
     "href": "pages/example.html",
     "title": "Workplace interaction",
     "section": "",
-    "text": "%load_ext autoreload\n%autoreload 2\nImport some plotting libraries and set some defaults:\nimport sys\nimport numpy as np\nimport pandas as pd\nfrom IPython.display import display, Markdown\nimport matplotlib.pyplot as plt\nimport seaborn as sns\nsns.set()\nsns.set_style(\"whitegrid\")\nnp.random.seed(42)\n%config InlineBackend.figure_formats = ['svg']",
-    "crumbs": [
-      "Examples",
-      "Workplace interaction"
-    ]
+    "text": "%load_ext autoreload\n%autoreload 2\nImport some plotting libraries and set some defaults:\nimport sys\nimport numpy as np\nimport pandas as pd\nfrom IPython.display import display, Markdown\nimport matplotlib.pyplot as plt\nimport seaborn as sns\nsns.set()\nsns.set_style(\"whitegrid\")\nnp.random.seed(42)\n%config InlineBackend.figure_formats = ['svg']"
   },
   {
     "objectID": "pages/example.html#sampling",
     "href": "pages/example.html#sampling",
     "title": "Workplace interaction",
     "section": "Sampling",
-    "text": "Sampling\n\nsubjects = pd.read_csv('../../data/data_table.csv')\nsample_size = subjects.shape[0]\n\n\nTip:\nBy adding a label and caption to a cell displaying a table, you can refer to that table elsewhere and insert it in a manuscript.\n\n\nsubjects\n\n\n\nTable 1: People included in the analysis.\n\n\n\n\n\n\n\n\n\n\nname\nage\nsex\nposition\nnationality\n\n\n\n\n0\nJulie\n27\nF\nPhDstudent\nDK\n\n\n1\nThomas\n33\nM\nPostdoc\nGB\n\n\n2\nEmilie\n23\nF\nPhDstudent\nCH\n\n\n3\nSofie\n31\nF\nPostdoc\nDK\n\n\n4\nSara\n29\nF\nPostdoc\nUS\n\n\n5\nCecilie\n34\nF\nPostdoc\nDK\n\n\n6\nAnders\n32\nM\nPhDstudent\nUK\n\n\n7\nEmma\n42\nF\nProfessor\nDK\n\n\n8\nCaroline\n31\nF\nPhDstudent\nDK\n\n\n9\nLaura\n30\nF\nPostdoc\nDK\n\n\n10\nMikkel\n33\nM\nPostdoc\nNL\n\n\n11\nJens\n27\nM\nPhDstudent\nDK\n\n\n12\nAndreas\n29\nM\nPhDstudent\nDK\n\n\n13\nJakob\n28\nM\nPhDstudent\nDK\n\n\n14\nMathilde\n61\nF\nProfessor\nDK\n\n\n15\nKatrine\n35\nF\nPostdoc\nDK\n\n\n16\nPoul\n30\nM\nPostdoc\nDK\n\n\n17\nAnna\n26\nF\nPhDstudent\nDK\n\n\n18\nPeter\n42\nM\nProfessor\nGB\n\n\n19\nIda\n53\nF\nPostdoc\nDK\n\n\n20\nFreja\n30\nF\nPostdoc\nDK\n\n\n21\nMaria\n39\nF\nProfessor\nUK\n\n\n22\nAmalie\n29\nF\nPhDstudent\nDK\n\n\n23\nCamilla\n35\nF\nPostdoc\nDK\n\n\n\n\n\n\n\n\n\n\n\nTip:\nBy generaing markdown for descriptions that will eventually end up in the manuscript, you can imbed python values. It also ensures that the manuscript exactly reflects the notebook.\n\n\n\nThe 24 subjects from workplaces in Denmark were interviewed …. blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah",
-    "crumbs": [
-      "Examples",
-      "Workplace interaction"
-    ]
+    "text": "Sampling\n\nsubjects = pd.read_csv('../../data/data_table.csv')\nsample_size = subjects.shape[0]\n\n\nTip:\nBy adding a label and caption to a cell displaying a table, you can refer to that table elsewhere and insert it in a manuscript.\n\n\nsubjects\n\n\n\nTable 1: People included in the analysis.\n\n\n\n\n\n\n\n\n\n\nname\nage\nsex\nposition\nnationality\n\n\n\n\n0\nJulie\n27\nF\nPhDstudent\nDK\n\n\n1\nThomas\n33\nM\nPostdoc\nGB\n\n\n2\nEmilie\n23\nF\nPhDstudent\nCH\n\n\n3\nSofie\n31\nF\nPostdoc\nDK\n\n\n4\nSara\n29\nF\nPostdoc\nUS\n\n\n5\nCecilie\n34\nF\nPostdoc\nDK\n\n\n6\nAnders\n32\nM\nPhDstudent\nUK\n\n\n7\nEmma\n42\nF\nProfessor\nDK\n\n\n8\nCaroline\n31\nF\nPhDstudent\nDK\n\n\n9\nLaura\n30\nF\nPostdoc\nDK\n\n\n10\nMikkel\n33\nM\nPostdoc\nNL\n\n\n11\nJens\n27\nM\nPhDstudent\nDK\n\n\n12\nAndreas\n29\nM\nPhDstudent\nDK\n\n\n13\nJakob\n28\nM\nPhDstudent\nDK\n\n\n14\nMathilde\n61\nF\nProfessor\nDK\n\n\n15\nKatrine\n35\nF\nPostdoc\nDK\n\n\n16\nPoul\n30\nM\nPostdoc\nDK\n\n\n17\nAnna\n26\nF\nPhDstudent\nDK\n\n\n18\nPeter\n42\nM\nProfessor\nGB\n\n\n19\nIda\n53\nF\nPostdoc\nDK\n\n\n20\nFreja\n30\nF\nPostdoc\nDK\n\n\n21\nMaria\n39\nF\nProfessor\nUK\n\n\n22\nAmalie\n29\nF\nPhDstudent\nDK\n\n\n23\nCamilla\n35\nF\nPostdoc\nDK\n\n\n\n\n\n\n\n\n\n\n\nTip:\nBy generaing markdown for descriptions that will eventually end up in the manuscript, you can imbed python values. It also ensures that the manuscript exactly reflects the notebook.\n\n\n\nThe 24 subjects from workplaces in Denmark were interviewed …. blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah"
   },
   {
     "objectID": "pages/example.html#interviews",
     "href": "pages/example.html#interviews",
     "title": "Workplace interaction",
     "section": "Interviews",
-    "text": "Interviews\nIn interviewed {python} sample_size workplace individuals were interviewed by …. blah, blah, blah, blah, blah, blah, blah, blah, blah, blah, blah, blah, blah, blah, blah, blah, blah, blah, blah, blah, blah, blah, blah, blah, blah, blah, blah, blah,\n\n\n#| label: tbl-measured-informality\n#| tbl-cap: \"Informality quantified for subjects in the study.\"\n\ndf = pd.DataFrame({'name': subjects.name, \n                   'seniority': np.random.randint(0, 5, sample_size), \n                   'age': subjects.age})\ndf['informality'] = np.random.normal(loc=10, scale=1, size=sample_size)\ndf\n\n\n\n\n\n\n\n\nname\nseniority\nage\ninformality\n\n\n\n\n0\nJulie\n3\n27\n10.816445\n\n\n1\nThomas\n4\n33\n8.476124\n\n\n2\nEmilie\n2\n23\n9.571954\n\n\n3\nSofie\n4\n31\n9.257593\n\n\n4\nSara\n4\n29\n9.296656\n\n\n5\nCecilie\n1\n34\n7.860379\n\n\n6\nAnders\n2\n32\n9.370525\n\n\n7\nEmma\n2\n42\n10.597720\n\n\n8\nCaroline\n2\n31\n12.559488\n\n\n9\nLaura\n4\n30\n10.394233\n\n\n10\nMikkel\n3\n33\n10.122219\n\n\n11\nJens\n2\n27\n9.484564\n\n\n12\nAndreas\n4\n29\n9.399746\n\n\n13\nJakob\n1\n28\n10.947440\n\n\n14\nMathilde\n3\n61\n10.291034\n\n\n15\nKatrine\n1\n35\n9.364440\n\n\n16\nPoul\n3\n30\n8.978448\n\n\n17\nAnna\n4\n26\n9.838245\n\n\n18\nPeter\n0\n42\n9.466351\n\n\n19\nIda\n3\n53\n9.994472\n\n\n20\nFreja\n1\n30\n9.770550\n\n\n21\nMaria\n4\n39\n10.389349\n\n\n22\nAmalie\n3\n29\n8.734881\n\n\n23\nCamilla\n0\n35\n11.091992\n\n\n\n\n\n\n\n\ndf.groupby(['seniority']).mean(numeric_only=True).reset_index()\n\n\n\nTable 2: Mean interaction scores by seniority and age\n\n\n\n\n\n\n\n\n\n\nseniority\nage\ninformality\n\n\n\n\n0\n0\n38.500000\n10.279172\n\n\n1\n1\n31.750000\n9.485702\n\n\n2\n2\n31.000000\n10.316850\n\n\n3\n3\n38.833333\n9.822917\n\n\n4\n4\n31.000000\n9.578849\n\n\n\n\n\n\n\n\n\n\n\nsns.scatterplot(x='age', y='informality', data=df, hue='seniority', palette='viridis')\nplt.ylabel('How informal you can be')\nplt.xlabel('Age')\nplt.legend(title='Seniority', loc='lower right', labels=['Undergrad', 'Postgrad', 'PhD', 'Postdoc', 'Professor'])\nplt.ylim(bottom=0) ;\n\n\n\n\n\n\n\nFigure 1: Interaction among Danes: How Danes interact is has very little to do with age and seniority, compared to most other contries.\n\n\n\n\n\nSeems Danish people act very informally unaffected by age and seniority.\n\ninformality_age_cor = df.informality.corr(df.age)\ninformality_age_cor\n\nnp.float64(0.10942859782514087)\n\n\n\ninformality_seniority_cor = df.informality.corr(df.seniority)\ninformality_seniority_cor\n\nnp.float64(-0.13673439318448927)\n\n\n\n\nThe correlation between informality and age was 0.109 and the correlation between informality and seniority was -0.137.\n\n\n\nsns.lmplot(x='age', y='informality', data=df, hue='seniority', palette='viridis')\nplt.ylabel('How informal you can be')\nplt.xlabel('Age') ;\n\n\n\n\n\n\n\nFigure 2: Interaction among Danes: Regressions of informality against age for five levels of seniority.",
+    "text": "Interviews\nIn interviewed {python} sample_size workplace individuals were interviewed by …. blah, blah, blah, blah, blah, blah, blah, blah, blah, blah, blah, blah, blah, blah, blah, blah, blah, blah, blah, blah, blah, blah, blah, blah, blah, blah, blah, blah,\n\n\n#| label: tbl-measured-informality\n#| tbl-cap: \"Informality quantified for subjects in the study.\"\n\ndf = pd.DataFrame({'name': subjects.name, \n                   'seniority': np.random.randint(0, 5, sample_size), \n                   'age': subjects.age})\ndf['informality'] = np.random.normal(loc=10, scale=1, size=sample_size)\ndf\n\n\n\n\n\n\n\n\nname\nseniority\nage\ninformality\n\n\n\n\n0\nJulie\n3\n27\n10.816445\n\n\n1\nThomas\n4\n33\n8.476124\n\n\n2\nEmilie\n2\n23\n9.571954\n\n\n3\nSofie\n4\n31\n9.257593\n\n\n4\nSara\n4\n29\n9.296656\n\n\n5\nCecilie\n1\n34\n7.860379\n\n\n6\nAnders\n2\n32\n9.370525\n\n\n7\nEmma\n2\n42\n10.597720\n\n\n8\nCaroline\n2\n31\n12.559488\n\n\n9\nLaura\n4\n30\n10.394233\n\n\n10\nMikkel\n3\n33\n10.122219\n\n\n11\nJens\n2\n27\n9.484564\n\n\n12\nAndreas\n4\n29\n9.399746\n\n\n13\nJakob\n1\n28\n10.947440\n\n\n14\nMathilde\n3\n61\n10.291034\n\n\n15\nKatrine\n1\n35\n9.364440\n\n\n16\nPoul\n3\n30\n8.978448\n\n\n17\nAnna\n4\n26\n9.838245\n\n\n18\nPeter\n0\n42\n9.466351\n\n\n19\nIda\n3\n53\n9.994472\n\n\n20\nFreja\n1\n30\n9.770550\n\n\n21\nMaria\n4\n39\n10.389349\n\n\n22\nAmalie\n3\n29\n8.734881\n\n\n23\nCamilla\n0\n35\n11.091992\n\n\n\n\n\n\n\n\ndf.groupby(['seniority']).mean(numeric_only=True).reset_index()\n\n\n\nTable 2: Mean interaction scores by seniority and age\n\n\n\n\n\n\n\n\n\n\nseniority\nage\ninformality\n\n\n\n\n0\n0\n38.500000\n10.279172\n\n\n1\n1\n31.750000\n9.485702\n\n\n2\n2\n31.000000\n10.316850\n\n\n3\n3\n38.833333\n9.822917\n\n\n4\n4\n31.000000\n9.578849\n\n\n\n\n\n\n\n\n\n\n\nsns.scatterplot(x='age', y='informality', data=df, hue='seniority', palette='viridis')\nplt.ylabel('How informal you can be')\nplt.xlabel('Age')\nplt.legend(title='Seniority', loc='lower right', labels=['Undergrad', 'Postgrad', 'PhD', 'Postdoc', 'Professor'])\nplt.ylim(bottom=0) ;\n\n\n\n\n\n\n\nFigure 1: Interaction among Danes: How Danes interact is has very little to do with age and seniority, compared to most other contries.\n\n\n\n\n\nSeems Danish people act very informally unaffected by age and seniority.\n\ninformality_age_cor = df.informality.corr(df.age)\ninformality_age_cor\n\nnp.float64(0.10942859782514087)\n\n\n\ninformality_seniority_cor = df.informality.corr(df.seniority)\ninformality_seniority_cor\n\nnp.float64(-0.13673439318448927)\n\n\n\n\nThe correlation between informality and age was 0.109 and the correlation between informality and seniority was -0.137.\n\n\n\nsns.lmplot(x='age', y='informality', data=df, hue='seniority', palette='viridis')\nplt.ylabel('How informal you can be')\nplt.xlabel('Age') ;\n\n\n\n\n\n\n\nFigure 2: Interaction among Danes: Regressions of informality against age for five levels of seniority."
+  },
+  {
+    "objectID": "pages/getting-started.html",
+    "href": "pages/getting-started.html",
+    "title": "Getting Started",
+    "section": "",
+    "text": "slurm-code is a command-line tool for submitting SLURM jobs on GenomeDK and automatically opening VSCode on the allocated compute node. It handles job submission, waits for the node to be ready, and launches a remote VSCode session – all in one command.",
     "crumbs": [
-      "Examples",
-      "Workplace interaction"
+      "Getting Started"
+    ]
+  },
+  {
+    "objectID": "pages/getting-started.html#installation",
+    "href": "pages/getting-started.html#installation",
+    "title": "Getting Started",
+    "section": "Installation",
+    "text": "Installation\n\npixicondapip\n\n\npixi workspace channel add munch-group\npixi add slurm-code\n\n\nconda install -c munch-group slurm-code\n\n\npip install slurm-code",
+    "crumbs": [
+      "Getting Started"
+    ]
+  },
+  {
+    "objectID": "pages/getting-started.html#prerequisites",
+    "href": "pages/getting-started.html#prerequisites",
+    "title": "Getting Started",
+    "section": "Prerequisites",
+    "text": "Prerequisites\n\nAn SSH host alias configured in ~/.ssh/config for the GenomeDK login node (default alias: gdk)\nVSCode with the Remote - SSH extension installed\n\nA minimal SSH config entry:\nHost gdk\n    HostName login.genome.au.dk\n    User your_username",
+    "crumbs": [
+      "Getting Started"
+    ]
+  },
+  {
+    "objectID": "pages/getting-started.html#quick-start",
+    "href": "pages/getting-started.html#quick-start",
+    "title": "Getting Started",
+    "section": "Quick start",
+    "text": "Quick start\nSubmit a job and open a remote VSCode window on the allocated node:\nslurm-code submit ~/my-project\nThis will:\n\nSubmit an sbatch job on GenomeDK with default resources (1 CPU, 8 GB memory, 8-hour walltime)\nWait for the job to start and the node to accept SSH connections\nOpen VSCode connected to ~/my-project on the compute node",
+    "crumbs": [
+      "Getting Started"
+    ]
+  },
+  {
+    "objectID": "pages/getting-started.html#global-options",
+    "href": "pages/getting-started.html#global-options",
+    "title": "Getting Started",
+    "section": "Global options",
+    "text": "Global options\nAll subcommands accept the --host / -H option to specify which SSH host alias to use:\nslurm-code -H my-cluster submit ~/project\n\n\n\nOption\nDefault\nDescription\n\n\n\n\n-H, --host\ngdk\nSSH host alias from ~/.ssh/config",
+    "crumbs": [
+      "Getting Started"
+    ]
+  },
+  {
+    "objectID": "pages/getting-started.html#commands",
+    "href": "pages/getting-started.html#commands",
+    "title": "Getting Started",
+    "section": "Commands",
+    "text": "Commands\n\n\n\nCommand\nDescription\n\n\n\n\nsubmit\nSubmit a SLURM job and open VSCode on the node\n\n\nprofiles\nShow available submit profiles\n\n\njobs\nList running slurm-code jobs\n\n\ncancel\nCancel slurm-code jobs\n\n\nreconnect\nReconnect VSCode to a running job",
+    "crumbs": [
+      "Getting Started"
     ]
   },
   {
@@ -133,49 +221,174 @@
     "href": "pages/overview.html",
     "title": "Overview",
     "section": "",
-    "text": "slurm-code lets you …\nLorem ipsum dolor sit amet, consectetur adipiscing elit. Duis sagittis posuere ligula sit amet lacinia. Duis dignissim pellentesque magna, rhoncus congue sapien finibus mollis. Ut eu sem laoreet, vehicula ipsum in, convallis erat. Vestibulum magna sem, blandit pulvinar augue sit amet, auctor malesuada sapien. Nullam faucibus leo eget eros hendrerit, non laoreet ipsum lacinia. Curabitur cursus diam elit, non tempus ante volutpat a. Quisque hendrerit blandit purus non fringilla. Integer sit amet elit viverra ante dapibus semper. Vestibulum viverra rutrum enim, at luctus enim posuere eu. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.",
-    "crumbs": [
-      "Overview"
-    ]
+    "text": "slurm-code lets you …\nLorem ipsum dolor sit amet, consectetur adipiscing elit. Duis sagittis posuere ligula sit amet lacinia. Duis dignissim pellentesque magna, rhoncus congue sapien finibus mollis. Ut eu sem laoreet, vehicula ipsum in, convallis erat. Vestibulum magna sem, blandit pulvinar augue sit amet, auctor malesuada sapien. Nullam faucibus leo eget eros hendrerit, non laoreet ipsum lacinia. Curabitur cursus diam elit, non tempus ante volutpat a. Quisque hendrerit blandit purus non fringilla. Integer sit amet elit viverra ante dapibus semper. Vestibulum viverra rutrum enim, at luctus enim posuere eu. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus."
   },
   {
     "objectID": "pages/overview.html#installation",
     "href": "pages/overview.html#installation",
     "title": "Overview",
     "section": "Installation",
-    "text": "Installation\n\npixicondapip\n\n\npixi workspace channel add munch-group\npixi add slurm-code\n\n\nconda install -c munch-group slurm-code\n\n\npip install slurm-code",
-    "crumbs": [
-      "Overview"
-    ]
+    "text": "Installation\n\npixicondapip\n\n\npixi workspace channel add munch-group\npixi add slurm-code\n\n\nconda install -c munch-group slurm-code\n\n\npip install slurm-code"
   },
   {
     "objectID": "pages/overview.html#basic-use",
     "href": "pages/overview.html#basic-use",
     "title": "Overview",
     "section": "Basic use",
-    "text": "Basic use",
-    "crumbs": [
-      "Overview"
-    ]
+    "text": "Basic use"
   },
   {
     "objectID": "pages/overview.html#some-use-case",
     "href": "pages/overview.html#some-use-case",
     "title": "Overview",
     "section": "Some use case",
-    "text": "Some use case\nThe functionname function does … slurm_code.modulename.functionname does … functionname does …\nLorem ipsum dolor sit amet, consectetur adipiscing elit. Duis sagittis posuere ligula sit amet lacinia. Duis dignissim pellentesque magna, rhoncus congue sapien finibus mollis. Ut eu sem laoreet, vehicula ipsum in, convallis erat. Vestibulum magna sem, blandit pulvinar augue sit amet, auctor malesuada sapien. Nullam faucibus leo eget eros hendrerit, non laoreet ipsum lacinia. Curabitur cursus diam elit, non tempus ante volutpat a. Quisque hendrerit blandit purus non fringilla. Integer sit amet elit viverra ante dapibus semper. Vestibulum viverra rutrum enim, at luctus enim posuere eu. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.\n\n# from slurm_code.modulename import functionname\n# functionname(3, 4)\n\nLorem ipsum dolor sit amet, consectetur adipiscing elit. Duis sagittis posuere ligula sit amet lacinia. Duis dignissim pellentesque magna, rhoncus congue sapien finibus mollis. Ut eu sem laoreet, vehicula ipsum in, convallis erat. Vestibulum magna sem, blandit pulvinar augue sit amet, auctor malesuada sapien. Nullam faucibus leo eget eros hendrerit, non laoreet ipsum lacinia. Curabitur cursus diam elit, non tempus ante volutpat a. Quisque hendrerit blandit purus non fringilla. Integer sit amet elit viverra ante dapibus semper. Vestibulum viverra rutrum enim, at luctus enim posuere eu. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.\ncontents:\n  - MdRenderer\nLorem ipsum dolor sit amet, consectetur adipiscing elit. Duis sagittis posuere ligula sit amet lacinia. Duis dignissim pellentesque magna, rhoncus congue sapien finibus mollis. Ut eu sem laoreet, vehicula ipsum in, convallis erat. Vestibulum magna sem, blandit pulvinar augue sit amet, auctor malesuada sapien. Nullam faucibus leo eget eros hendrerit, non laoreet ipsum lacinia. Curabitur cursus diam elit, non tempus ante volutpat a. Quisque hendrerit blandit purus non fringilla. Integer sit amet elit viverra ante dapibus semper. Vestibulum viverra rutrum enim, at luctus enim posuere eu. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.",
-    "crumbs": [
-      "Overview"
-    ]
+    "text": "Some use case\nThe functionname function does … slurm_code.modulename.functionname does … functionname does …\nLorem ipsum dolor sit amet, consectetur adipiscing elit. Duis sagittis posuere ligula sit amet lacinia. Duis dignissim pellentesque magna, rhoncus congue sapien finibus mollis. Ut eu sem laoreet, vehicula ipsum in, convallis erat. Vestibulum magna sem, blandit pulvinar augue sit amet, auctor malesuada sapien. Nullam faucibus leo eget eros hendrerit, non laoreet ipsum lacinia. Curabitur cursus diam elit, non tempus ante volutpat a. Quisque hendrerit blandit purus non fringilla. Integer sit amet elit viverra ante dapibus semper. Vestibulum viverra rutrum enim, at luctus enim posuere eu. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.\n\n# from slurm_code.modulename import functionname\n# functionname(3, 4)\n\nLorem ipsum dolor sit amet, consectetur adipiscing elit. Duis sagittis posuere ligula sit amet lacinia. Duis dignissim pellentesque magna, rhoncus congue sapien finibus mollis. Ut eu sem laoreet, vehicula ipsum in, convallis erat. Vestibulum magna sem, blandit pulvinar augue sit amet, auctor malesuada sapien. Nullam faucibus leo eget eros hendrerit, non laoreet ipsum lacinia. Curabitur cursus diam elit, non tempus ante volutpat a. Quisque hendrerit blandit purus non fringilla. Integer sit amet elit viverra ante dapibus semper. Vestibulum viverra rutrum enim, at luctus enim posuere eu. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.\ncontents:\n  - MdRenderer\nLorem ipsum dolor sit amet, consectetur adipiscing elit. Duis sagittis posuere ligula sit amet lacinia. Duis dignissim pellentesque magna, rhoncus congue sapien finibus mollis. Ut eu sem laoreet, vehicula ipsum in, convallis erat. Vestibulum magna sem, blandit pulvinar augue sit amet, auctor malesuada sapien. Nullam faucibus leo eget eros hendrerit, non laoreet ipsum lacinia. Curabitur cursus diam elit, non tempus ante volutpat a. Quisque hendrerit blandit purus non fringilla. Integer sit amet elit viverra ante dapibus semper. Vestibulum viverra rutrum enim, at luctus enim posuere eu. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus."
   },
   {
     "objectID": "pages/overview.html#learning-more",
     "href": "pages/overview.html#learning-more",
     "title": "Overview",
     "section": "Learning more",
-    "text": "Learning more\nGo to the anvanced page to learn how to …\n\nExamples page: sites using quartodoc.",
+    "text": "Learning more\nGo to the anvanced page to learn how to …\n\nExamples page: sites using quartodoc."
+  },
+  {
+    "objectID": "pages/profiles.html",
+    "href": "pages/profiles.html",
+    "title": "Submit Profiles",
+    "section": "",
+    "text": "Submit profiles let you save frequently used job configurations in a config file and apply them with --profile &lt;name&gt;, similar to SSH config host entries.",
     "crumbs": [
-      "Overview"
+      "Submit Profiles"
+    ]
+  },
+  {
+    "objectID": "pages/profiles.html#config-file-location",
+    "href": "pages/profiles.html#config-file-location",
+    "title": "Submit Profiles",
+    "section": "Config file location",
+    "text": "Config file location\nThe config file is located at:\n~/.slurm-code/config.ini\nYou can override this by setting the SLURM_CODE_CONFIG environment variable:\nexport SLURM_CODE_CONFIG=~/my-custom-config.ini",
+    "crumbs": [
+      "Submit Profiles"
+    ]
+  },
+  {
+    "objectID": "pages/profiles.html#config-file-format",
+    "href": "pages/profiles.html#config-file-format",
+    "title": "Submit Profiles",
+    "section": "Config file format",
+    "text": "Config file format\nThe file uses INI format (parsed by Python’s configparser). The special [DEFAULT] section provides base values inherited by all named profiles.\n[DEFAULT]\naccount = my_account\nmem_per_cpu = 8g\n\n[standard]\nwalltime = 08:00:00\n\n[gpu]\npartition = gpu\ncpus_per_gpu = 4\nmem_per_cpu = 16g\nwalltime = 12:00:00\nIn this example:\n\n[DEFAULT] sets account and mem_per_cpu for all profiles\n[standard] inherits both defaults and adds a walltime\n[gpu] inherits account from DEFAULT, overrides mem_per_cpu, and adds GPU-specific settings",
+    "crumbs": [
+      "Submit Profiles"
+    ]
+  },
+  {
+    "objectID": "pages/profiles.html#valid-keys",
+    "href": "pages/profiles.html#valid-keys",
+    "title": "Submit Profiles",
+    "section": "Valid keys",
+    "text": "Valid keys\nProfile keys use the same names as the CLI options (with underscores instead of hyphens):\n\n\n\nKey\nCorresponding option\n\n\n\n\naccount\n--account\n\n\ncpus_per_task\n--cpus-per-task\n\n\ncpus_per_gpu\n--cpus-per-gpu\n\n\nerror\n--error\n\n\nexclude\n--exclude\n\n\njob_name\n--job-name\n\n\nmem\n--mem\n\n\nmem_per_cpu\n--mem-per-cpu\n\n\nmincpus\n--mincpus\n\n\nno_requeue\n--no-requeue\n\n\nnodes\n--nodes\n\n\nnodelist\n--nodelist\n\n\nntasks\n--ntasks\n\n\nntasks_per_node\n--ntasks-per-node\n\n\noom_kill_step\n--oom-kill-step\n\n\npartition\n--partition\n\n\nrequeue\n--requeue\n\n\nthread_spec\n--thread-spec\n\n\nuse_min_nodes\n--use-min-nodes\n\n\nwalltime\n--walltime\n\n\n\nBoolean keys (no_requeue, requeue, use_min_nodes) accept true/false, yes/no, or 1/0.",
+    "crumbs": [
+      "Submit Profiles"
+    ]
+  },
+  {
+    "objectID": "pages/profiles.html#precedence",
+    "href": "pages/profiles.html#precedence",
+    "title": "Submit Profiles",
+    "section": "Precedence",
+    "text": "Precedence\nWhen a profile is active, values are resolved in this order (highest priority first):\n\nCLI flags – explicitly typed on the command line\nProfile values – from the named section (including inherited [DEFAULT] values)\nClick defaults – the hardcoded defaults (--cpus-per-task 1, --mem-per-cpu 8g, etc.)\n\nThis means you can always override any profile setting from the command line:\n# Uses gpu profile but overrides the walltime\nslurm-code submit -P gpu -t 24:00:00 ~/my-project",
+    "crumbs": [
+      "Submit Profiles"
+    ]
+  },
+  {
+    "objectID": "pages/profiles.html#using-profiles",
+    "href": "pages/profiles.html#using-profiles",
+    "title": "Submit Profiles",
+    "section": "Using profiles",
+    "text": "Using profiles\nApply a profile with -P / --profile:\nslurm-code submit -P standard ~/my-project\nslurm-code submit -P gpu ~/my-project\nWithout --profile, only [DEFAULT] values are applied (if the config file exists).",
+    "crumbs": [
+      "Submit Profiles"
+    ]
+  },
+  {
+    "objectID": "pages/profiles.html#viewing-profiles",
+    "href": "pages/profiles.html#viewing-profiles",
+    "title": "Submit Profiles",
+    "section": "Viewing profiles",
+    "text": "Viewing profiles\nThe profiles command shows the config file path and all defined profiles with their effective settings:\nslurm-code profiles\nExample output:\nConfig file: /home/user/.slurm-code/config.ini\n\n[DEFAULT]\n  account = my_account\n  mem_per_cpu = 8g\n\n[standard]\n  walltime = 08:00:00\n  account = my_account\n  mem_per_cpu = 8g\n\n[gpu]\n  partition = gpu\n  cpus_per_gpu = 4\n  mem_per_cpu = 16g\n  walltime = 12:00:00\n  account = my_account\nNamed sections show all effective values, including those inherited from [DEFAULT].",
+    "crumbs": [
+      "Submit Profiles"
+    ]
+  },
+  {
+    "objectID": "pages/profiles.html#error-handling",
+    "href": "pages/profiles.html#error-handling",
+    "title": "Submit Profiles",
+    "section": "Error handling",
+    "text": "Error handling\nRequesting a profile that doesn’t exist shows an error with the available profiles:\nError: Unknown profile 'fast'. Available: standard, gpu\nUsing an invalid key in the config file also produces a clear error:\nError: Invalid key(s) in profile: invalid_key",
+    "crumbs": [
+      "Submit Profiles"
+    ]
+  },
+  {
+    "objectID": "pages/submit.html",
+    "href": "pages/submit.html",
+    "title": "Submitting Jobs",
+    "section": "",
+    "text": "The submit command creates a SLURM job, waits for a node to be allocated and ready, then opens VSCode connected to that node.",
+    "crumbs": [
+      "Submitting Jobs"
+    ]
+  },
+  {
+    "objectID": "pages/submit.html#usage",
+    "href": "pages/submit.html#usage",
+    "title": "Submitting Jobs",
+    "section": "Usage",
+    "text": "Usage\nslurm-code submit [OPTIONS] [DIRECTORY]\nDIRECTORY is an optional path on the remote host to open in VSCode. Relative paths are resolved relative to $HOME. If omitted, VSCode opens the welcome screen on the allocated node.",
+    "crumbs": [
+      "Submitting Jobs"
+    ]
+  },
+  {
+    "objectID": "pages/submit.html#examples",
+    "href": "pages/submit.html#examples",
+    "title": "Submitting Jobs",
+    "section": "Examples",
+    "text": "Examples\nSubmit with default settings and open a project directory:\nslurm-code submit ~/my-project\nRequest more memory and a longer walltime:\nslurm-code submit -m 16g -t 12:00:00 ~/my-project\nSubmit to the GPU partition with a named profile:\nslurm-code submit -P gpu ~/my-project\nOverride a profile’s walltime from the command line:\nslurm-code submit -P gpu -t 24:00:00 ~/my-project\nSubmit without opening a specific directory:\nslurm-code submit -A my_account",
+    "crumbs": [
+      "Submitting Jobs"
+    ]
+  },
+  {
+    "objectID": "pages/submit.html#options",
+    "href": "pages/submit.html#options",
+    "title": "Submitting Jobs",
+    "section": "Options",
+    "text": "Options\n\nResource allocation\n\n\n\nOption\nDefault\nDescription\n\n\n\n\n-A, --account\n\nCharge job to specified account\n\n\n-c, --cpus-per-task\n1\nCPUs per task\n\n\n-n, --ntasks\n1\nNumber of tasks\n\n\n-N, --nodes\n\nNumber of nodes (N or min-max)\n\n\n--ntasks-per-node\n\nTasks per node\n\n\n--mincpus\n\nMinimum logical processors per node\n\n\n--cpus-per-gpu\n\nCPUs per allocated GPU\n\n\n\n\n\nMemory\n\n\n\nOption\nDefault\nDescription\n\n\n\n\n-m, --mem-per-cpu\n8g\nMemory per allocated CPU\n\n\n--mem\n\nMinimum total real memory (e.g. 4g)\n\n\n\n\n\nTime and scheduling\n\n\n\nOption\nDefault\nDescription\n\n\n\n\n-t, --walltime\n08:00:00\nTime limit (e.g. 08:00:00)\n\n\n-p, --partition\n\nPartition requested\n\n\n\n\n\nJob identity\n\n\n\n\n\n\n\n\nOption\nDefault\nDescription\n\n\n\n\n-J, --job-name\nsc-&lt;dirname&gt;\nJob name (auto-derived from directory if not set)\n\n\n-e, --error\n\nFile for batch script’s standard error\n\n\n\n\n\nNode selection\n\n\n\nOption\nDescription\n\n\n\n\n-w, --nodelist\nRequest specific hosts\n\n\n-x, --exclude\nExclude specific hosts\n\n\n--use-min-nodes\nPrefer smaller node count\n\n\n\n\n\nJob behaviour\n\n\n\nOption\nDescription\n\n\n\n\n--requeue\nPermit the job to be requeued\n\n\n--no-requeue\nDo not requeue the job\n\n\n--oom-kill-step\nOOMKillStep behaviour (0 or 1)\n\n\n--thread-spec\nCount of reserved threads\n\n\n\n\n\nProfiles\n\n\n\n\n\n\n\nOption\nDescription\n\n\n\n\n-P, --profile\nApply a named submit profile from the config file\n\n\n\nSee Submit Profiles for details on setting up and using profiles.",
+    "crumbs": [
+      "Submitting Jobs"
+    ]
+  },
+  {
+    "objectID": "pages/submit.html#what-happens-when-you-submit",
+    "href": "pages/submit.html#what-happens-when-you-submit",
+    "title": "Submitting Jobs",
+    "section": "What happens when you submit",
+    "text": "What happens when you submit\n\nThe remote directory is verified on the host (if specified)\nAn sbatch command is built from CLI flags, profile values, and defaults\nThe job is submitted via SSH\nslurm-code polls squeue until the job enters RUNNING state\nSSH connectivity to the allocated node is verified\nVSCode opens with a remote connection to the node",
+    "crumbs": [
+      "Submitting Jobs"
+    ]
+  },
+  {
+    "objectID": "pages/submit.html#job-naming",
+    "href": "pages/submit.html#job-naming",
+    "title": "Submitting Jobs",
+    "section": "Job naming",
+    "text": "Job naming\nJobs are automatically named sc-&lt;dirname&gt; based on the directory basename. For example, submitting ~/projects/my-analysis creates a job named sc-my-analysis. If no directory is given, the name is sc-&lt;timestamp&gt;. You can override this with --job-name.\nThe sc- prefix is how slurm-code identifies its own jobs for the jobs, cancel, and connect commands.",
+    "crumbs": [
+      "Submitting Jobs"
     ]
   }
 ]
