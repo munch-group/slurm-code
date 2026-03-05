@@ -1,5 +1,7 @@
 ---
 title: Getting Started
+aliases:
+  - ../index.html
 ---
 
 **slurm-code** is a command-line tool for submitting SLURM jobs on [GenomeDK](https://genome.au.dk) and automatically opening VSCode on the allocated compute node. It handles job submission, waits for the node to be ready, and launches a remote VSCode session -- all in one command.
