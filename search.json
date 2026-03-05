@@ -231,27 +231,6 @@
     "text": "Installation\n\npixicondapip\n\n\npixi workspace channel add munch-group\npixi add slurm-code\n\n\nconda install -c munch-group slurm-code\n\n\npip install slurm-code"
   },
   {
-    "objectID": "pages/overview.html#basic-use",
-    "href": "pages/overview.html#basic-use",
-    "title": "Overview",
-    "section": "Basic use",
-    "text": "Basic use"
-  },
-  {
-    "objectID": "pages/overview.html#some-use-case",
-    "href": "pages/overview.html#some-use-case",
-    "title": "Overview",
-    "section": "Some use case",
-    "text": "Some use case\nThe functionname function does … slurm_code.modulename.functionname does … functionname does …\nLorem ipsum dolor sit amet, consectetur adipiscing elit. Duis sagittis posuere ligula sit amet lacinia. Duis dignissim pellentesque magna, rhoncus congue sapien finibus mollis. Ut eu sem laoreet, vehicula ipsum in, convallis erat. Vestibulum magna sem, blandit pulvinar augue sit amet, auctor malesuada sapien. Nullam faucibus leo eget eros hendrerit, non laoreet ipsum lacinia. Curabitur cursus diam elit, non tempus ante volutpat a. Quisque hendrerit blandit purus non fringilla. Integer sit amet elit viverra ante dapibus semper. Vestibulum viverra rutrum enim, at luctus enim posuere eu. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.\n\n# from slurm_code.modulename import functionname\n# functionname(3, 4)\n\nLorem ipsum dolor sit amet, consectetur adipiscing elit. Duis sagittis posuere ligula sit amet lacinia. Duis dignissim pellentesque magna, rhoncus congue sapien finibus mollis. Ut eu sem laoreet, vehicula ipsum in, convallis erat. Vestibulum magna sem, blandit pulvinar augue sit amet, auctor malesuada sapien. Nullam faucibus leo eget eros hendrerit, non laoreet ipsum lacinia. Curabitur cursus diam elit, non tempus ante volutpat a. Quisque hendrerit blandit purus non fringilla. Integer sit amet elit viverra ante dapibus semper. Vestibulum viverra rutrum enim, at luctus enim posuere eu. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.\ncontents:\n  - MdRenderer\nLorem ipsum dolor sit amet, consectetur adipiscing elit. Duis sagittis posuere ligula sit amet lacinia. Duis dignissim pellentesque magna, rhoncus congue sapien finibus mollis. Ut eu sem laoreet, vehicula ipsum in, convallis erat. Vestibulum magna sem, blandit pulvinar augue sit amet, auctor malesuada sapien. Nullam faucibus leo eget eros hendrerit, non laoreet ipsum lacinia. Curabitur cursus diam elit, non tempus ante volutpat a. Quisque hendrerit blandit purus non fringilla. Integer sit amet elit viverra ante dapibus semper. Vestibulum viverra rutrum enim, at luctus enim posuere eu. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus."
-  },
-  {
-    "objectID": "pages/overview.html#learning-more",
-    "href": "pages/overview.html#learning-more",
-    "title": "Overview",
-    "section": "Learning more",
-    "text": "Learning more\nGo to the anvanced page to learn how to …\n\nExamples page: sites using quartodoc."
-  },
-  {
     "objectID": "pages/profiles.html",
     "href": "pages/profiles.html",
     "title": "Submit Profiles",
