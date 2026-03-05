@@ -9,20 +9,21 @@ source:
 
 build:
   number: 0
-  script: $PYTHON -m pip install . -vv
-  python_version_independent: true
-  # entry_points:
-  #  - slurm-code = slurm_code:slurm_code
+  noarch: python
+  script: python -m pip install . -vv
+  entry_points:
+    - slurm-code = slurm_code:slurm_code
 
 requirements:
   host:
     - python
     - pip
     - setuptools>=65.0    
-  run:  # your library dependencies
+  run:
+    - python >=3.9,<3.14
     {% for dep in pyproject.get("project").get("dependencies") %}
     - {{ dep.lower() }}
-    {% endfor %}  
+    {% endfor %}
 
 channels:  # channels for your library dependencies
   - conda-forge

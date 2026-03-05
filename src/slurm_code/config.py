@@ -18,6 +18,7 @@ VALID_PROFILE_KEYS = frozenset(
         "nodes",
         "oom_kill_step",
         "partition",
+        "pixi",
         "requeue",
         "thread_spec",
         "walltime",
@@ -31,7 +32,7 @@ VALID_PROFILE_KEYS = frozenset(
     }
 )
 
-BOOL_KEYS = frozenset({"no_requeue", "requeue", "use_min_nodes"})
+BOOL_KEYS = frozenset({"no_requeue", "pixi", "requeue", "use_min_nodes"})
 
 
 def get_config_path() -> Path:

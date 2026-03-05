@@ -177,8 +177,83 @@ def expand_node_list(nodelist):
     return nodes
 
 
-def submit_and_wait_for_job(sbatch_cmd, host="gdk"):
+def setup_pixi_env(node, directory, host="gdk"):
+    """Set up pixi environment activation on a remote node.
+
+    Runs ``pixi shell-hook`` on the login host (which shares the home
+    filesystem with compute nodes) and writes the output to
+    ``~/.slurm-code-pixi-env.sh``.
+
+    Returns True on success, False on failure.
+    """
+    # Run pixi shell-hook on the login host — pixi is installed there and
+    # the home filesystem is shared with compute nodes.
+    # Use the default pixi install path since non-interactive SSH sessions
+    # may not have ~/.pixi/bin on PATH.
+    result = subprocess.run(
+        f"ssh {host} 'cd {directory} && $HOME/.pixi/bin/pixi shell-hook --shell bash'",
+        shell=True,
+        stdout=subprocess.PIPE,
+        stderr=subprocess.PIPE,
+        text=True,
+    )
+    if result.returncode != 0:
+        return False
+
+    hook_script = result.stdout.strip()
+    if not hook_script:
+        return False
+
+    # Write the activation script to the shared home filesystem
+    write_cmd = f"ssh {host} 'cat > ~/.slurm-code-pixi-env.sh'"
+    write_result = subprocess.run(
+        write_cmd,
+        shell=True,
+        input=hook_script + "\n",
+        stdout=subprocess.PIPE,
+        stderr=subprocess.PIPE,
+        text=True,
+    )
+    return write_result.returncode == 0
+
+
+def ensure_bashrc_hook(host="gdk"):
+    """Check if ~/.bashrc already sources the pixi activation script.
+
+    Returns True if the hook is already present, False otherwise.
+    """
+    result = subprocess.run(
+        f"ssh {host} 'grep -q slurm-code-pixi-env.sh ~/.bashrc'",
+        shell=True,
+        stdout=subprocess.PIPE,
+        stderr=subprocess.PIPE,
+    )
+    return result.returncode == 0
+
+
+def add_bashrc_hook(host="gdk"):
+    """Append the pixi activation source line to ~/.bashrc on the remote."""
+    snippet = (
+        "\n# Added by slurm-code for pixi environment activation\n"
+        "[ -f ~/.slurm-code-pixi-env.sh ] && source ~/.slurm-code-pixi-env.sh\n"
+    )
+    cmd = f"ssh {host} 'cat >> ~/.bashrc'"
+    subprocess.run(
+        cmd,
+        shell=True,
+        input=snippet,
+        stdout=subprocess.PIPE,
+        stderr=subprocess.PIPE,
+        text=True,
+        check=True,
+    )
+
+
+def submit_and_wait_for_job(sbatch_cmd, host="gdk", pixi_dir=None):
     """Submit a SLURM job and wait for it to start running.
+
+    If *pixi_dir* is given, sets up pixi environment activation on the
+    allocated node after SSH connectivity is confirmed.
 
     Returns the first allocated node name.
     Raises RuntimeError if no nodes are found.
@@ -213,6 +288,14 @@ def submit_and_wait_for_job(sbatch_cmd, host="gdk"):
         if result.returncode == 0:
             break
         time.sleep(5)
+
+    if pixi_dir:
+        print(f"Setting up pixi environment from {pixi_dir}...")
+        if not setup_pixi_env(node, pixi_dir, host):
+            print(
+                "Warning: Failed to set up pixi environment. "
+                "Check that pixi is installed and the directory contains a pixi project."
+            )
 
     return node
 

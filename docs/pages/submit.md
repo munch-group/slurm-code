@@ -96,6 +96,16 @@ slurm-code submit -A my_account
 | `--oom-kill-step` | OOMKillStep behaviour (`0` or `1`) |
 | `--thread-spec` | Count of reserved threads |
 
+### Environment
+
+| Option | Description |
+|--------|-------------|
+| `--pixi` | Activate the [pixi](https://pixi.sh) environment from DIRECTORY on the allocated node |
+
+When `--pixi` is used, slurm-code runs `pixi shell-hook` in the project directory on the allocated node and writes the activation commands to `~/.slurm-code-pixi-env.sh`. On first use, you will be prompted to add a source line to `~/.bashrc` so that VSCode integrated terminals automatically activate the pixi environment. The activation script is overwritten on each `--pixi` submit, so it always reflects the current project.
+
+You can also set `pixi = true` in a [submit profile](profiles.md) to always activate pixi for that profile.
+
 ### Profiles
 
 | Option | Description |
@@ -111,7 +121,8 @@ See [Submit Profiles](profiles.md) for details on setting up and using profiles.
 3. The job is submitted via SSH
 4. slurm-code polls `squeue` until the job enters RUNNING state
 5. SSH connectivity to the allocated node is verified
-6. VSCode opens with a remote connection to the node
+6. If `--pixi` is set, the pixi environment is activated and the bashrc hook is configured
+7. VSCode opens with a remote connection to the node
 
 ## Job naming
 

@@ -12,10 +12,12 @@ from slurm_code.config import (
     load_config,
 )
 from slurm_code.core import (
+    add_bashrc_hook,
     build_sbatch_command,
     cancel_managed_jobs,
     check_remote_directory,
     derive_job_name,
+    ensure_bashrc_hook,
     list_managed_jobs,
     open_vscode,
     submit_and_wait_for_job,
@@ -74,13 +76,19 @@ def slurm_code(ctx, host):
 )
 @click.option("--cpus-per-gpu", help="CPUs per allocated GPU.")
 @click.option(
+    "--pixi",
+    is_flag=True,
+    default=False,
+    help="Activate pixi environment from DIRECTORY on the allocated node.",
+)
+@click.option(
     "-P",
     "--profile",
     default=None,
     help="Submit profile from config file.",
 )
 @click.pass_context
-def submit(ctx, directory, profile, **kwargs):
+def submit(ctx, directory, profile, pixi, **kwargs):
     """Submit a SLURM job, wait for allocation, and open VSCode.
 
     DIRECTORY is the optional path on the remote host to open in VSCode.
@@ -106,6 +114,17 @@ def submit(ctx, directory, profile, **kwargs):
     # Load profile settings
     config = load_config()
     profile_values = get_profile(config, profile)
+
+    # Resolve --pixi: CLI flag wins, then profile value
+    if not pixi and "pixi" in profile_values:
+        pixi = coerce_profile_value("pixi", profile_values["pixi"])
+
+    if pixi and directory is None:
+        click.echo(
+            "Error: --pixi requires a DIRECTORY argument (the pixi project path).",
+            err=True,
+        )
+        sys.exit(1)
 
     params = {}
     if directory is not None:
@@ -156,10 +175,27 @@ def submit(ctx, directory, profile, **kwargs):
     sbatch_cmd = build_sbatch_command(params)
 
     try:
-        node = submit_and_wait_for_job(sbatch_cmd, host)
+        node = submit_and_wait_for_job(
+            sbatch_cmd, host, pixi_dir=directory if pixi else None
+        )
     except RuntimeError as e:
         click.echo(f"Error: {e}", err=True)
         sys.exit(1)
+
+    # Set up bashrc hook for pixi activation
+    if pixi:
+        if not ensure_bashrc_hook(host):
+            if click.confirm(
+                "Add pixi activation hook to ~/.bashrc on the cluster? "
+                "(Required for VSCode terminals to auto-activate the pixi environment)"
+            ):
+                add_bashrc_hook(host)
+                click.echo("Added pixi activation hook to ~/.bashrc.")
+            else:
+                click.echo(
+                    "Skipped. To activate pixi manually, add this line to ~/.bashrc:\n"
+                    "  [ -f ~/.slurm-code-pixi-env.sh ] && source ~/.slurm-code-pixi-env.sh"
+                )
 
     open_vscode(node, directory)
 
