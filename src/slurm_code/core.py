@@ -177,12 +177,15 @@ def expand_node_list(nodelist):
     return nodes
 
 
+PIXI_ENV_SCRIPT = ".slurm-code-pixi-env.sh"
+
+
 def setup_pixi_env(node, directory, host="gdk"):
-    """Set up pixi environment activation on a remote node.
+    """Set up pixi environment activation for a project directory.
 
     Runs ``pixi shell-hook`` on the login host (which shares the home
     filesystem with compute nodes) and writes the output to
-    ``~/.slurm-code-pixi-env.sh``.
+    ``<directory>/.slurm-code-pixi-env.sh``.
 
     Returns True on success, False on failure.
     """
@@ -204,8 +207,9 @@ def setup_pixi_env(node, directory, host="gdk"):
     if not hook_script:
         return False
 
-    # Write the activation script to the shared home filesystem
-    write_cmd = f"ssh {host} 'cat > ~/.slurm-code-pixi-env.sh'"
+    # Write the activation script into the project directory
+    script_path = f"{directory}/{PIXI_ENV_SCRIPT}"
+    write_cmd = f"ssh {host} 'cat > {script_path}'"
     write_result = subprocess.run(
         write_cmd,
         shell=True,
@@ -223,7 +227,7 @@ def ensure_bashrc_hook(host="gdk"):
     Returns True if the hook is already present, False otherwise.
     """
     result = subprocess.run(
-        f"ssh {host} 'grep -q slurm-code-pixi-env.sh ~/.bashrc'",
+        f"ssh {host} 'grep -qF {PIXI_ENV_SCRIPT} ~/.bashrc'",
         shell=True,
         stdout=subprocess.PIPE,
         stderr=subprocess.PIPE,
@@ -232,10 +236,16 @@ def ensure_bashrc_hook(host="gdk"):
 
 
 def add_bashrc_hook(host="gdk"):
-    """Append the pixi activation source line to ~/.bashrc on the remote."""
+    """Append the pixi activation source line to ~/.bashrc on the remote.
+
+    The hook checks for the activation script in the current working
+    directory, so it only fires when the shell starts in a project
+    directory that has been set up with ``--pixi`` (e.g. a VSCode
+    integrated terminal).
+    """
     snippet = (
         "\n# Added by slurm-code for pixi environment activation\n"
-        "[ -f ~/.slurm-code-pixi-env.sh ] && source ~/.slurm-code-pixi-env.sh\n"
+        f"[ -f {PIXI_ENV_SCRIPT} ] && source {PIXI_ENV_SCRIPT}\n"
     )
     cmd = f"ssh {host} 'cat >> ~/.bashrc'"
     subprocess.run(
@@ -276,6 +286,11 @@ def submit_and_wait_for_job(sbatch_cmd, host="gdk", pixi_dir=None):
     node = nodes[0]
     print(f"Job allocated to node(s): {', '.join(nodes)}")
 
+    # Remove any stale host key before checking connectivity, so that
+    # the StrictHostKeyChecking=no probe adds the current key and VSCode
+    # won't prompt about a changed fingerprint.
+    clear_host_key(node)
+
     # Wait for SSH on the node to become reachable (via the login host)
     print(f"Waiting for {node} to accept SSH connections...")
     for _ in range(12):
@@ -298,6 +313,20 @@ def submit_and_wait_for_job(sbatch_cmd, host="gdk", pixi_dir=None):
             )
 
     return node
+
+
+def clear_host_key(node):
+    """Remove a stale SSH host key for a compute node.
+
+    Compute nodes get reimaged frequently, so their host keys change.
+    Clearing the old key avoids an interactive fingerprint mismatch prompt
+    when VSCode connects.
+    """
+    subprocess.run(
+        ["ssh-keygen", "-R", node],
+        stdout=subprocess.PIPE,
+        stderr=subprocess.PIPE,
+    )
 
 
 def open_vscode(node, directory=None):

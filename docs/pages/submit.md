@@ -102,7 +102,7 @@ slurm-code submit -A my_account
 |--------|-------------|
 | `--pixi` | Activate the [pixi](https://pixi.sh) environment from DIRECTORY on the allocated node |
 
-When `--pixi` is used, slurm-code runs `pixi shell-hook` in the project directory on the allocated node and writes the activation commands to `~/.slurm-code-pixi-env.sh`. On first use, you will be prompted to add a source line to `~/.bashrc` so that VSCode integrated terminals automatically activate the pixi environment. The activation script is overwritten on each `--pixi` submit, so it always reflects the current project.
+When `--pixi` is used, slurm-code runs `pixi shell-hook` in the project directory and writes the activation commands to `<DIRECTORY>/.slurm-code-pixi-env.sh`. On first use, you will be prompted to add a source line to `~/.bashrc` so that VSCode integrated terminals automatically activate the pixi environment. The activation script is overwritten on each `--pixi` submit, so it always reflects the current environment. The bashrc hook sources `.slurm-code-pixi-env.sh` relative to the current working directory, so it only activates when the shell starts in the project directory (as VSCode integrated terminals do). Regular SSH login shells start in `~` and are unaffected.
 
 You can also set `pixi = true` in a [submit profile](profiles.md) to always activate pixi for that profile.
 

@@ -194,7 +194,7 @@ def submit(ctx, directory, profile, pixi, **kwargs):
             else:
                 click.echo(
                     "Skipped. To activate pixi manually, add this line to ~/.bashrc:\n"
-                    "  [ -f ~/.slurm-code-pixi-env.sh ] && source ~/.slurm-code-pixi-env.sh"
+                    "  [ -f .slurm-code-pixi-env.sh ] && source .slurm-code-pixi-env.sh"
                 )
 
     open_vscode(node, directory)
