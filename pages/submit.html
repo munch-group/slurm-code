@@ -453,8 +453,24 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </tr>
 </tbody>
 </table>
-<p>When <code>--pixi</code> is used, slurm-code runs <code>pixi shell-hook</code> in the project directory and writes the activation commands to <code>&lt;DIRECTORY&gt;/.slurm-code-pixi-env.sh</code>. On first use, you will be prompted to add a source line to <code>~/.bashrc</code> so that VSCode integrated terminals automatically activate the pixi environment. The activation script is overwritten on each <code>--pixi</code> submit, so it always reflects the current environment. The bashrc hook sources <code>.slurm-code-pixi-env.sh</code> relative to the current working directory, so it only activates when the shell starts in the project directory (as VSCode integrated terminals do). Regular SSH login shells start in <code>~</code> and are unaffected.</p>
-<p>You can also set <code>pixi = true</code> in a <a href="../pages/profiles.html">submit profile</a> to always activate pixi for that profile.</p>
+<section id="slurm-environment-variables" class="level4">
+<h4 class="anchored" data-anchor-id="slurm-environment-variables">SLURM environment variables</h4>
+<p>When a <code>DIRECTORY</code> is given, slurm-code writes the job’s SLURM environment variables (such as <code>SLURM_JOB_ID</code>, <code>SLURM_CPUS_PER_TASK</code>, <code>SLURM_MEM_PER_CPU</code>, etc.) to <code>&lt;DIRECTORY&gt;/.slurm-code-slurm-env.sh</code>. This makes the variables available in VSCode integrated terminals, which would otherwise not have them since they run outside the job’s process tree.</p>
+</section>
+<section id="pixi-activation" class="level4">
+<h4 class="anchored" data-anchor-id="pixi-activation">Pixi activation</h4>
+<p>When <code>--pixi</code> is used, slurm-code runs <code>pixi shell-hook</code> in the project directory and writes the activation commands to <code>&lt;DIRECTORY&gt;/.slurm-code-pixi-env.sh</code>. You can also set <code>pixi = true</code> in a <a href="../pages/profiles.html">submit profile</a> to always activate pixi for that profile.</p>
+</section>
+<section id="bashrc-hook" class="level4">
+<h4 class="anchored" data-anchor-id="bashrc-hook">Bashrc hook</h4>
+<p>On first use, you will be prompted to add a source line to <code>~/.bashrc</code> on the cluster:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="bu">[</span> <span class="ot">-f</span> ~/.slurm-code-env.sh <span class="bu">]</span> <span class="kw">&amp;&amp;</span> <span class="bu">source</span> ~/.slurm-code-env.sh</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>The bashrc hook does two things:</p>
+<ol type="1">
+<li>Sources <code>~/.slurm-code-env.sh</code> (a loader that is overwritten on each submit with absolute paths to the current project’s SLURM env script). This provides SLURM variables like <code>SLURM_JOB_ID</code> and <code>SLURM_MEM_PER_CPU</code> in every shell.</li>
+<li>Sources <code>.slurm-code-pixi-env.sh</code> using a <strong>relative</strong> path, so pixi activation only happens when the shell starts in the project directory (as VSCode integrated terminals do). A regular SSH login starts in <code>~</code> and is unaffected.</li>
+</ol>
+</section>
 </section>
 <section id="profiles" class="level3">
 <h3 class="anchored" data-anchor-id="profiles">Profiles</h3>
@@ -487,7 +503,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li>The job is submitted via SSH</li>
 <li>slurm-code polls <code>squeue</code> until the job enters RUNNING state</li>
 <li>SSH connectivity to the allocated node is verified</li>
-<li>If <code>--pixi</code> is set, the pixi environment is activated and the bashrc hook is configured</li>
+<li>SLURM environment variables are written to the project directory</li>
+<li>If <code>--pixi</code> is set, the pixi environment activation script is generated</li>
+<li>Bashrc hooks are configured (prompts on first use)</li>
 <li>VSCode opens with a remote connection to the node</li>
 </ol>
 </section>
