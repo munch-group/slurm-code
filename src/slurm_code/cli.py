@@ -176,26 +176,31 @@ def submit(ctx, directory, profile, pixi, **kwargs):
 
     try:
         node = submit_and_wait_for_job(
-            sbatch_cmd, host, pixi_dir=directory if pixi else None
+            sbatch_cmd,
+            host,
+            directory=directory,
+            pixi_dir=directory if pixi else None,
         )
     except RuntimeError as e:
         click.echo(f"Error: {e}", err=True)
         sys.exit(1)
 
-    # Set up bashrc hook for pixi activation
-    if pixi:
-        if not ensure_bashrc_hook(host):
-            if click.confirm(
-                "Add pixi activation hook to ~/.bashrc on the cluster? "
-                "(Required for VSCode terminals to auto-activate the pixi environment)"
-            ):
-                add_bashrc_hook(host)
-                click.echo("Added pixi activation hook to ~/.bashrc.")
-            else:
-                click.echo(
-                    "Skipped. To activate pixi manually, add this line to ~/.bashrc:\n"
-                    "  [ -f .slurm-code-pixi-env.sh ] && source .slurm-code-pixi-env.sh"
-                )
+    # Set up bashrc hook that sources the loader script
+    if directory and not ensure_bashrc_hook(host):
+        if click.confirm(
+            "Add slurm-code hook to ~/.bashrc on the cluster? "
+            "(Provides SLURM environment variables"
+            + (" and pixi activation" if pixi else "")
+            + " in VSCode terminals)"
+        ):
+            add_bashrc_hook(host)
+            click.echo("Added slurm-code hook to ~/.bashrc.")
+        else:
+            click.echo(
+                "Skipped. To set up manually, add these lines to ~/.bashrc:\n"
+                "  [ -f ~/.slurm-code-env.sh ] && source ~/.slurm-code-env.sh\n"
+                "  [ -f .slurm-code-pixi-env.sh ] && source .slurm-code-pixi-env.sh"
+            )
 
     open_vscode(node, directory)
 

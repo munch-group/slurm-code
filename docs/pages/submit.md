@@ -102,9 +102,26 @@ slurm-code submit -A my_account
 |--------|-------------|
 | `--pixi` | Activate the [pixi](https://pixi.sh) environment from DIRECTORY on the allocated node |
 
-When `--pixi` is used, slurm-code runs `pixi shell-hook` in the project directory and writes the activation commands to `<DIRECTORY>/.slurm-code-pixi-env.sh`. On first use, you will be prompted to add a source line to `~/.bashrc` so that VSCode integrated terminals automatically activate the pixi environment. The activation script is overwritten on each `--pixi` submit, so it always reflects the current environment. The bashrc hook sources `.slurm-code-pixi-env.sh` relative to the current working directory, so it only activates when the shell starts in the project directory (as VSCode integrated terminals do). Regular SSH login shells start in `~` and are unaffected.
+#### SLURM environment variables
 
-You can also set `pixi = true` in a [submit profile](profiles.md) to always activate pixi for that profile.
+When a `DIRECTORY` is given, slurm-code writes the job's SLURM environment variables (such as `SLURM_JOB_ID`, `SLURM_CPUS_PER_TASK`, `SLURM_MEM_PER_CPU`, etc.) to `<DIRECTORY>/.slurm-code-slurm-env.sh`. This makes the variables available in VSCode integrated terminals, which would otherwise not have them since they run outside the job's process tree.
+
+#### Pixi activation
+
+When `--pixi` is used, slurm-code runs `pixi shell-hook` in the project directory and writes the activation commands to `<DIRECTORY>/.slurm-code-pixi-env.sh`. You can also set `pixi = true` in a [submit profile](profiles.md) to always activate pixi for that profile.
+
+#### Bashrc hook
+
+On first use, you will be prompted to add a source line to `~/.bashrc` on the cluster:
+
+```bash
+[ -f ~/.slurm-code-env.sh ] && source ~/.slurm-code-env.sh
+```
+
+The bashrc hook does two things:
+
+1. Sources `~/.slurm-code-env.sh` (a loader that is overwritten on each submit with absolute paths to the current project's SLURM env script). This provides SLURM variables like `SLURM_JOB_ID` and `SLURM_MEM_PER_CPU` in every shell.
+2. Sources `.slurm-code-pixi-env.sh` using a **relative** path, so pixi activation only happens when the shell starts in the project directory (as VSCode integrated terminals do). A regular SSH login starts in `~` and is unaffected.
 
 ### Profiles
 
@@ -121,8 +138,10 @@ See [Submit Profiles](profiles.md) for details on setting up and using profiles.
 3. The job is submitted via SSH
 4. slurm-code polls `squeue` until the job enters RUNNING state
 5. SSH connectivity to the allocated node is verified
-6. If `--pixi` is set, the pixi environment is activated and the bashrc hook is configured
-7. VSCode opens with a remote connection to the node
+6. SLURM environment variables are written to the project directory
+7. If `--pixi` is set, the pixi environment activation script is generated
+8. Bashrc hooks are configured (prompts on first use)
+9. VSCode opens with a remote connection to the node
 
 ## Job naming
 
