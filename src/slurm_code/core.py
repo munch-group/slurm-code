@@ -401,15 +401,18 @@ def submit_and_wait_for_job(sbatch_cmd, host="gdk", directory=None, pixi_dir=Non
     print(f"Job allocated to node(s): {', '.join(nodes)}")
 
     # Remove any stale host key before checking connectivity, so that
-    # the StrictHostKeyChecking=no probe adds the current key and VSCode
-    # won't prompt about a changed fingerprint.
+    # the StrictHostKeyChecking=accept-new probe adds the current key
+    # and VSCode won't prompt about a changed fingerprint.
     clear_host_key(node)
 
-    # Wait for SSH on the node to become reachable (via the login host)
+    # Wait for SSH on the node to become reachable.
+    # We connect locally (relying on ProxyJump in ~/.ssh/config) so that
+    # StrictHostKeyChecking=accept-new populates the *local* known_hosts —
+    # preventing VSCode from prompting for the host fingerprint.
     print(f"Waiting for {node} to accept SSH connections...")
     for _ in range(12):
         result = subprocess.run(
-            f"ssh {host} 'ssh -o ConnectTimeout=3 -o StrictHostKeyChecking=no {node} true'",
+            f"ssh -o ConnectTimeout=5 -o StrictHostKeyChecking=accept-new {node} true",
             shell=True,
             stdout=subprocess.PIPE,
             stderr=subprocess.PIPE,

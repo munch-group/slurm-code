@@ -45,6 +45,7 @@ platforms = ["osx-arm64", "linux-64", "win-64"]
 
 [tool.pixi.dependencies]
 python = ">=3.9,<3.14"
+click = ">=8.0"
 pytest = "*"
 jupyter = "*"
 quarto = "*"
@@ -58,7 +59,7 @@ git-lfs = "*"
 gh = "*"
 ipython = "*"
 seaborn = "*"
-nbdime = ">=4.0.2,<5"
+nbdime = "*"
 r-rsvg = "*"
 
 # [tool.pixi.pypi-dependencies]
