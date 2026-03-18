@@ -64,12 +64,16 @@ def check_remote_directory(directory, host="gdk"):
 def derive_job_name(directory=None):
     """Derive a job name from a directory path, or from a timestamp if no directory.
 
-    E.g. ~/projects/my-analysis -> sc-my-analysis
+    A short timestamp suffix ensures uniqueness when multiple jobs target
+    the same directory.
+
+    E.g. ~/projects/my-analysis -> sc-my-analysis-0318-1430
          None -> sc-20260302-143022
     """
+    ts = datetime.now().strftime("%m%d-%H%M")
     if directory:
         basename = os.path.basename(directory.rstrip("/"))
-        return f"{JOB_NAME_PREFIX}{basename}"
+        return f"{JOB_NAME_PREFIX}{basename}-{ts}"
     return f"{JOB_NAME_PREFIX}{datetime.now().strftime('%Y%m%d-%H%M%S')}"
 
 
@@ -537,8 +541,14 @@ def cancel_managed_jobs(host="gdk", job_id=None, job_name=None, cancel_all=False
         # If user passed a bare name without any known prefix, add the current one
         if not _is_managed_job(job_name):
             job_name = f"{JOB_NAME_PREFIX}{job_name}"
-        run_remote(f"scancel --name={job_name}", host)
-        print(f"Cancelled jobs with name {job_name}")
+        # Names now include a timestamp suffix, so match by prefix
+        jobs = list_managed_jobs(host, all_states=True)
+        matches = [j for j in jobs if j["name"].startswith(job_name)]
+        if not matches:
+            raise RuntimeError(f"No jobs found matching '{job_name}'")
+        match_ids = " ".join(j["jobid"] for j in matches)
+        run_remote(f"scancel {match_ids}", host)
+        print(f"Cancelled {len(matches)} job(s) matching '{job_name}'")
     elif cancel_all:
         jobs = list_managed_jobs(host, all_states=True)
         if not jobs:

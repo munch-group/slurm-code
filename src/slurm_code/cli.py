@@ -12,6 +12,7 @@ from slurm_code.config import (
     load_config,
 )
 from slurm_code.core import (
+    JOB_NAME_PREFIX,
     add_bashrc_hook,
     build_sbatch_command,
     cancel_managed_jobs,
@@ -289,7 +290,7 @@ def reconnect(ctx, directory):
     from slurm_code.core import expand_node_list, get_job_node
 
     running_jobs = list_managed_jobs(host, all_states=False)
-    matches = [j for j in running_jobs if j["name"].endswith(f"-{basename}")]
+    matches = [j for j in running_jobs if j["name"].startswith(f"{JOB_NAME_PREFIX}{basename}")]
 
     if not matches:
         click.echo(
