@@ -108,7 +108,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 }</script>
 
 
-<link rel="stylesheet" href="../api/_styles-quartodoc.css">
 <link rel="stylesheet" href="../styles.css">
 </head>
 
@@ -128,12 +127,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <span class="navbar-toggler-icon"></span>
 </button>
           <div class="collapse navbar-collapse" id="navbarCollapse">
-            <ul class="navbar-nav navbar-nav-scroll me-auto">
-  <li class="nav-item">
-    <a class="nav-link" href="../api/"> 
-<span class="menu-text">API reference</span></a>
-  </li>  
-</ul>
             <ul class="navbar-nav navbar-nav-scroll ms-auto">
   <li class="nav-item compact">
     <a class="nav-link" href="https://github.com/munch-group/slurm-code/"> <i class="bi bi-github" role="img">
@@ -172,19 +165,22 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../pages/submit.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Submitting Jobs</span></a>
+ <span class="menu-text">Submit Jobs</span></a>
   </div>
 </li>
+        <li class="sidebar-item">
+ <span class="menu-text">pages/jobs.md</span>
+  </li>
+        <li class="sidebar-item">
+ <span class="menu-text">pages/cancel.md</span>
+  </li>
+        <li class="sidebar-item">
+ <span class="menu-text">pages/reconnect.md</span>
+  </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../pages/profiles.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Submit Profiles</span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../pages/managing-jobs.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Managing Jobs</span></a>
   </div>
 </li>
     </ul>
@@ -248,11 +244,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="prerequisites" class="level2">
 <h2 class="anchored" data-anchor-id="prerequisites">Prerequisites</h2>
-<ul>
-<li>An SSH host alias configured in <code>~/.ssh/config</code> for the GenomeDK login node (default alias: <code>gdk</code>)</li>
+<ol type="1">
+<li>SSH keys set up for <a href="https://genome.au.dk/docs/getting-started/#public-key-authentication">login to GenomeDK without password</a>:</li>
 <li><a href="https://code.visualstudio.com/">VSCode</a> with the <a href="https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-ssh">Remote - SSH</a> extension installed</li>
-</ul>
-<p>A minimal SSH config entry:</p>
+<li>An SSH host alias configured in <code>~/.ssh/config</code> for the GenomeDK login node (default alias: <code>gdk</code>):</li>
+</ol>
 <pre><code>Host gdk
     HostName login.genome.au.dk
     User your_username</code></pre>
@@ -301,7 +297,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <tbody>
 <tr class="odd">
 <td><a href="../pages/submit.html"><code>submit</code></a></td>
-<td>Submit a SLURM job and open VSCode on the node</td>
+<td>Submit a SLURM job and open VSCode on the node. <a href="../pages/submit.html">Full documentation</a></td>
 </tr>
 <tr class="even">
 <td><a href="../pages/profiles.html"><code>profiles</code></a></td>
@@ -730,8 +726,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <div class="nav-page nav-page-previous">
   </div>
   <div class="nav-page nav-page-next">
-      <a href="../pages/submit.html" class="pagination-link" aria-label="Submitting Jobs">
-        <span class="nav-page-text">Submitting Jobs</span> <i class="bi bi-arrow-right-short"></i>
+      <a href="../pages/submit.html" class="pagination-link" aria-label="Submit Jobs">
+        <span class="nav-page-text">Submit Jobs</span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
