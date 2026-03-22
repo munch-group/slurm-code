@@ -1,31 +1,183 @@
 [
   {
-    "objectID": "pages/managing-jobs.html",
-    "href": "pages/managing-jobs.html",
-    "title": "Managing Jobs",
+    "objectID": "pages/jobs.html",
+    "href": "pages/jobs.html",
+    "title": "Listing Jobs",
     "section": "",
-    "text": "slurm-code provides commands to list, cancel, and reconnect to jobs that were submitted through slurm-code submit. These commands identify managed jobs by their sc- name prefix."
+    "text": "slurm-code provides commands to list, cancel, and reconnect to jobs that were submitted through slurm-code submit. These commands identify managed jobs by their sc- name prefix.",
+    "crumbs": [
+      "Listing Jobs"
+    ]
   },
   {
-    "objectID": "pages/managing-jobs.html#listing-jobs",
-    "href": "pages/managing-jobs.html#listing-jobs",
-    "title": "Managing Jobs",
+    "objectID": "pages/jobs.html#listing-jobs",
+    "href": "pages/jobs.html#listing-jobs",
+    "title": "Listing Jobs",
     "section": "Listing jobs",
-    "text": "Listing jobs\nThe jobs command shows your running slurm-code jobs:\nslurm-code jobs\nExample output:\n     JOBID  NAME                            PARTITION     REQMEM    CPUS    TIMELIMIT     ELAPSED       STATE\n----------------------------------------------------------------------------------------------------------\n   1234567  sc-my-project                   normal        8Gn       1       08:00:00      01:23:45      RUNNING\n   1234568  sc-analysis                     normal        16Gn      4       12:00:00      00:45:12      RUNNING\n\nOptions\n\n\n\nOption\nDescription\n\n\n\n\n--all-states\nInclude PENDING jobs (default: RUNNING only)\n\n\n\nTo also see pending jobs:\nslurm-code jobs --all-states"
+    "text": "Listing jobs\nThe jobs command shows your running slurm-code jobs:\nslurm-code jobs\nExample output:\n     JOBID  NAME                            PARTITION     REQMEM    CPUS    TIMELIMIT     ELAPSED       STATE\n----------------------------------------------------------------------------------------------------------\n   1234567  sc-my-project                   normal        8Gn       1       08:00:00      01:23:45      RUNNING\n   1234568  sc-analysis                     normal        16Gn      4       12:00:00      00:45:12      RUNNING\n\nOptions\n\n\n\nOption\nDescription\n\n\n\n\n--all-states\nInclude PENDING jobs (default: RUNNING only)\n\n\n\nTo also see pending jobs:\nslurm-code jobs --all-states",
+    "crumbs": [
+      "Listing Jobs"
+    ]
   },
   {
-    "objectID": "pages/managing-jobs.html#cancelling-jobs",
-    "href": "pages/managing-jobs.html#cancelling-jobs",
-    "title": "Managing Jobs",
+    "objectID": "pages/submit.html",
+    "href": "pages/submit.html",
+    "title": "Submitting Jobs",
+    "section": "",
+    "text": "The submit command creates a SLURM job, waits for a node to be allocated and ready, then opens VSCode connected to that node.",
+    "crumbs": [
+      "Submitting Jobs"
+    ]
+  },
+  {
+    "objectID": "pages/submit.html#usage",
+    "href": "pages/submit.html#usage",
+    "title": "Submitting Jobs",
+    "section": "Usage",
+    "text": "Usage\nslurm-code submit [OPTIONS] [DIRECTORY]\nDIRECTORY is an optional path on the remote host to open in VSCode. Relative paths are resolved relative to $HOME. If omitted, VSCode opens the welcome screen on the allocated node.",
+    "crumbs": [
+      "Submitting Jobs"
+    ]
+  },
+  {
+    "objectID": "pages/submit.html#examples",
+    "href": "pages/submit.html#examples",
+    "title": "Submitting Jobs",
+    "section": "Examples",
+    "text": "Examples\nSubmit with default settings and open a project directory:\nslurm-code submit ~/my-project\nRequest more memory and a longer walltime:\nslurm-code submit -m 16g -t 12:00:00 ~/my-project\nSubmit to the GPU partition with a named profile:\nslurm-code submit -P gpu ~/my-project\nOverride a profile’s walltime from the command line:\nslurm-code submit -P gpu -t 24:00:00 ~/my-project\nSubmit without opening a specific directory:\nslurm-code submit -A my_account",
+    "crumbs": [
+      "Submitting Jobs"
+    ]
+  },
+  {
+    "objectID": "pages/submit.html#options",
+    "href": "pages/submit.html#options",
+    "title": "Submitting Jobs",
+    "section": "Options",
+    "text": "Options\n\nResource allocation\n\n\n\nOption\nDefault\nDescription\n\n\n\n\n-A, --account\n\nCharge job to specified account\n\n\n-c, --cpus-per-task\n1\nCPUs per task\n\n\n-n, --ntasks\n1\nNumber of tasks\n\n\n-N, --nodes\n\nNumber of nodes (N or min-max)\n\n\n--ntasks-per-node\n\nTasks per node\n\n\n--mincpus\n\nMinimum logical processors per node\n\n\n--cpus-per-gpu\n\nCPUs per allocated GPU\n\n\n\n\n\nMemory\n\n\n\nOption\nDefault\nDescription\n\n\n\n\n-m, --mem-per-cpu\n8g\nMemory per allocated CPU\n\n\n--mem\n\nMinimum total real memory (e.g. 4g)\n\n\n\n\n\nTime and scheduling\n\n\n\nOption\nDefault\nDescription\n\n\n\n\n-t, --walltime\n08:00:00\nTime limit (e.g. 08:00:00)\n\n\n-p, --partition\n\nPartition requested\n\n\n\n\n\nJob identity\n\n\n\n\n\n\n\n\nOption\nDefault\nDescription\n\n\n\n\n-J, --job-name\nsc-&lt;dirname&gt;\nJob name (auto-derived from directory if not set)\n\n\n-e, --error\n\nFile for batch script’s standard error\n\n\n\n\n\nNode selection\n\n\n\nOption\nDescription\n\n\n\n\n-w, --nodelist\nRequest specific hosts\n\n\n-x, --exclude\nExclude specific hosts\n\n\n--use-min-nodes\nPrefer smaller node count\n\n\n\n\n\nJob behaviour\n\n\n\nOption\nDescription\n\n\n\n\n--requeue\nPermit the job to be requeued\n\n\n--no-requeue\nDo not requeue the job\n\n\n--oom-kill-step\nOOMKillStep behaviour (0 or 1)\n\n\n--thread-spec\nCount of reserved threads\n\n\n\n\n\nEnvironment\n\n\n\nOption\nDescription\n\n\n\n\n--pixi\nActivate the pixi environment from DIRECTORY on the allocated node\n\n\n\n\nSLURM environment variables\nWhen a DIRECTORY is given, slurm-code writes the job’s SLURM environment variables (such as VS_SLURM_JOB_ID, VS_SLURM_CPUS_PER_TASK, VS_SLURM_MEM_PER_CPU, etc.) to &lt;DIRECTORY&gt;/.slurm-code-slurm-env.sh. These use a VS_ prefix to avoid colliding with native SLURM variables (which would interfere with sbatch and srun). The variables are available in VSCode integrated terminals, which would otherwise not have them since they run outside the job’s process tree.\n\n\nPixi activation\nWhen --pixi is used, slurm-code runs pixi shell-hook in the project directory and writes the activation commands to &lt;DIRECTORY&gt;/.slurm-code-pixi-env.sh. You can also set pixi = true in a submit profile to always activate pixi for that profile.\n\n\nBashrc hook\nOn first use, you will be prompted to add a source line to ~/.bashrc on the cluster:\n[ -f ~/.slurm-code-env.sh ] && source ~/.slurm-code-env.sh\nThe bashrc hook does two things:\n\nSources ~/.slurm-code-env.sh (a loader that is overwritten on each submit with absolute paths to the current project’s SLURM env script). This provides variables like VS_SLURM_JOB_ID and VS_SLURM_MEM_PER_CPU in every shell.\nSources .slurm-code-pixi-env.sh using a relative path, so pixi activation only happens when the shell starts in the project directory (as VSCode integrated terminals do). A regular SSH login starts in ~ and is unaffected.\n\n\n\n\nProfiles\n\n\n\n\n\n\n\nOption\nDescription\n\n\n\n\n-P, --profile\nApply a named submit profile from the config file\n\n\n\nSee Submit Profiles for details on setting up and using profiles.",
+    "crumbs": [
+      "Submitting Jobs"
+    ]
+  },
+  {
+    "objectID": "pages/submit.html#what-happens-when-you-submit",
+    "href": "pages/submit.html#what-happens-when-you-submit",
+    "title": "Submitting Jobs",
+    "section": "What happens when you submit",
+    "text": "What happens when you submit\n\nThe remote directory is verified on the host (if specified)\nAn sbatch command is built from CLI flags, profile values, and defaults\nThe job is submitted via SSH\nslurm-code polls squeue until the job enters RUNNING state\nSSH connectivity to the allocated node is verified\nSLURM environment variables are written to the project directory\nIf --pixi is set, the pixi environment activation script is generated\nBashrc hooks are configured (prompts on first use)\nVSCode opens with a remote connection to the node",
+    "crumbs": [
+      "Submitting Jobs"
+    ]
+  },
+  {
+    "objectID": "pages/submit.html#job-naming",
+    "href": "pages/submit.html#job-naming",
+    "title": "Submitting Jobs",
+    "section": "Job naming",
+    "text": "Job naming\nJobs are automatically named sc-&lt;dirname&gt; based on the directory basename. For example, submitting ~/projects/my-analysis creates a job named sc-my-analysis. If no directory is given, the name is sc-&lt;timestamp&gt;. You can override this with --job-name.\nThe sc- prefix is how slurm-code identifies its own jobs for the jobs, cancel, and connect commands.",
+    "crumbs": [
+      "Submitting Jobs"
+    ]
+  },
+  {
+    "objectID": "pages/cancel.html",
+    "href": "pages/cancel.html",
+    "title": "Cancel Jobs",
+    "section": "",
+    "text": "slurm-code provides commands to list, cancel, and reconnect to jobs that were submitted through slurm-code submit. These commands identify managed jobs by their sc- name prefix.",
+    "crumbs": [
+      "Cancel Jobs"
+    ]
+  },
+  {
+    "objectID": "pages/cancel.html#cancelling-jobs",
+    "href": "pages/cancel.html#cancelling-jobs",
+    "title": "Cancel Jobs",
     "section": "Cancelling jobs",
-    "text": "Cancelling jobs\nThe cancel command cancels slurm-code managed jobs.\n\nCancel by job ID\nslurm-code cancel 1234567\n\n\nCancel by name\nYou can use the directory basename (without the sc- prefix):\nslurm-code cancel my-project\nOr the full job name:\nslurm-code cancel sc-my-project\n\n\nCancel all jobs\nslurm-code cancel --all\n\n\nOptions\n\n\n\nArgument/Option\nDescription\n\n\n\n\nJOB_ID_OR_NAME\nA job ID (numeric) or job name to cancel\n\n\n--all\nCancel all slurm-code managed jobs"
+    "text": "Cancelling jobs\nThe cancel command cancels slurm-code managed jobs.\n\nCancel by job ID\nslurm-code cancel 1234567\n\n\nCancel by name\nYou can use the directory basename (without the sc- prefix):\nslurm-code cancel my-project\nOr the full job name:\nslurm-code cancel sc-my-project\n\n\nCancel all jobs\nslurm-code cancel --all\n\n\nOptions\n\n\n\nArgument/Option\nDescription\n\n\n\n\nJOB_ID_OR_NAME\nA job ID (numeric) or job name to cancel\n\n\n--all\nCancel all slurm-code managed jobs",
+    "crumbs": [
+      "Cancel Jobs"
+    ]
   },
   {
-    "objectID": "pages/managing-jobs.html#reconnecting-to-a-job",
-    "href": "pages/managing-jobs.html#reconnecting-to-a-job",
-    "title": "Managing Jobs",
+    "objectID": "pages/reconnect.html",
+    "href": "pages/reconnect.html",
+    "title": "Reconnecting to Jobs",
+    "section": "",
+    "text": "slurm-code provides commands to list, cancel, and reconnect to jobs that were submitted through slurm-code submit. These commands identify managed jobs by their sc- name prefix.",
+    "crumbs": [
+      "Reconnecting to Jobs"
+    ]
+  },
+  {
+    "objectID": "pages/reconnect.html#reconnecting-to-a-job",
+    "href": "pages/reconnect.html#reconnecting-to-a-job",
+    "title": "Reconnecting to Jobs",
     "section": "Reconnecting to a job",
-    "text": "Reconnecting to a job\nIf VSCode disconnects or you close the window, use reconnect to reopen it on the same node:\nslurm-code reconnect ~/my-project\nThis finds the running job that matches the directory name and opens VSCode on its allocated node. Relative paths are resolved relative to $HOME.\nIf multiple jobs match the directory name, you’ll be prompted to select one:\nMultiple matching jobs found:\n  [1] 1234567  01:23:45  RUNNING\n  [2] 1234568  00:45:12  RUNNING\nSelect job number:\n\nUsage\nslurm-code reconnect DIRECTORY\n\n\n\nArgument\nDescription\n\n\n\n\nDIRECTORY\nPath on the remote host (used to match the job name)"
+    "text": "Reconnecting to a job\nIf VSCode disconnects or you close the window, use reconnect to reopen it on the same node:\nslurm-code reconnect ~/my-project\nThis finds the running job that matches the directory name and opens VSCode on its allocated node. Relative paths are resolved relative to $HOME.\nIf multiple jobs match the directory name, you’ll be prompted to select one:\nMultiple matching jobs found:\n  [1] 1234567  01:23:45  RUNNING\n  [2] 1234568  00:45:12  RUNNING\nSelect job number:\n\nUsage\nslurm-code reconnect DIRECTORY\n\n\n\nArgument\nDescription\n\n\n\n\nDIRECTORY\nPath on the remote host (used to match the job name)",
+    "crumbs": [
+      "Reconnecting to Jobs"
+    ]
+  },
+  {
+    "objectID": "pages/getting-started.html",
+    "href": "pages/getting-started.html",
+    "title": "Getting Started",
+    "section": "",
+    "text": "slurm-code is a command-line tool for submitting SLURM jobs on GenomeDK and automatically opening VSCode on the allocated compute node. It handles job submission, waits for the node to be ready, and launches a remote VSCode session – all in one command.",
+    "crumbs": [
+      "Getting Started"
+    ]
+  },
+  {
+    "objectID": "pages/getting-started.html#installation",
+    "href": "pages/getting-started.html#installation",
+    "title": "Getting Started",
+    "section": "Installation",
+    "text": "Installation\n\npixicondapip\n\n\npixi workspace channel add munch-group\npixi add slurm-code\n\n\nconda install -c munch-group slurm-code\n\n\npip install slurm-code",
+    "crumbs": [
+      "Getting Started"
+    ]
+  },
+  {
+    "objectID": "pages/getting-started.html#prerequisites",
+    "href": "pages/getting-started.html#prerequisites",
+    "title": "Getting Started",
+    "section": "Prerequisites",
+    "text": "Prerequisites\n\nSSH keys set up for login to GenomeDK without password:\nVSCode with the Remote - SSH extension installed\nAn SSH host alias configured in ~/.ssh/config for the GenomeDK login node (default alias: gdk):\n\nHost gdk\n    HostName login.genome.au.dk\n    User your_username",
+    "crumbs": [
+      "Getting Started"
+    ]
+  },
+  {
+    "objectID": "pages/getting-started.html#quick-start",
+    "href": "pages/getting-started.html#quick-start",
+    "title": "Getting Started",
+    "section": "Quick start",
+    "text": "Quick start\nSubmit a job and open a remote VSCode window on the allocated node:\nslurm-code submit ~/my-project\nThis will:\n\nSubmit an sbatch job on GenomeDK with default resources (1 CPU, 8 GB memory, 8-hour walltime)\nWait for the job to start and the node to accept SSH connections\nOpen VSCode connected to ~/my-project on the compute node",
+    "crumbs": [
+      "Getting Started"
+    ]
+  },
+  {
+    "objectID": "pages/getting-started.html#global-options",
+    "href": "pages/getting-started.html#global-options",
+    "title": "Getting Started",
+    "section": "Global options",
+    "text": "Global options\nAll subcommands accept the --host / -H option to specify which SSH host alias to use:\nslurm-code -H my-cluster submit ~/project\n\n\n\nOption\nDefault\nDescription\n\n\n\n\n-H, --host\ngdk\nSSH host alias from ~/.ssh/config",
+    "crumbs": [
+      "Getting Started"
+    ]
+  },
+  {
+    "objectID": "pages/getting-started.html#commands",
+    "href": "pages/getting-started.html#commands",
+    "title": "Getting Started",
+    "section": "Commands",
+    "text": "Commands\n\n\n\nCommand\nDescription\n\n\n\n\nsubmit\nSubmit a SLURM job and open VSCode on the node. Full documentation\n\n\nprofiles\nShow available submit profiles\n\n\njobs\nList running slurm-code jobs\n\n\ncancel\nCancel slurm-code jobs\n\n\nreconnect\nReconnect VSCode to a running job",
+    "crumbs": [
+      "Getting Started"
+    ]
   },
   {
     "objectID": "pages/profiles.html",
@@ -108,123 +260,31 @@
     ]
   },
   {
-    "objectID": "pages/getting-started.html",
-    "href": "pages/getting-started.html",
-    "title": "Getting Started",
+    "objectID": "pages/managing-jobs.html",
+    "href": "pages/managing-jobs.html",
+    "title": "Managing Jobs",
     "section": "",
-    "text": "slurm-code is a command-line tool for submitting SLURM jobs on GenomeDK and automatically opening VSCode on the allocated compute node. It handles job submission, waits for the node to be ready, and launches a remote VSCode session – all in one command.",
-    "crumbs": [
-      "Getting Started"
-    ]
+    "text": "slurm-code provides commands to list, cancel, and reconnect to jobs that were submitted through slurm-code submit. These commands identify managed jobs by their sc- name prefix."
   },
   {
-    "objectID": "pages/getting-started.html#installation",
-    "href": "pages/getting-started.html#installation",
-    "title": "Getting Started",
-    "section": "Installation",
-    "text": "Installation\n\npixicondapip\n\n\npixi workspace channel add munch-group\npixi add slurm-code\n\n\nconda install -c munch-group slurm-code\n\n\npip install slurm-code",
-    "crumbs": [
-      "Getting Started"
-    ]
+    "objectID": "pages/managing-jobs.html#listing-jobs",
+    "href": "pages/managing-jobs.html#listing-jobs",
+    "title": "Managing Jobs",
+    "section": "Listing jobs",
+    "text": "Listing jobs\nThe jobs command shows your running slurm-code jobs:\nslurm-code jobs\nExample output:\n     JOBID  NAME                            PARTITION     REQMEM    CPUS    TIMELIMIT     ELAPSED       STATE\n----------------------------------------------------------------------------------------------------------\n   1234567  sc-my-project                   normal        8Gn       1       08:00:00      01:23:45      RUNNING\n   1234568  sc-analysis                     normal        16Gn      4       12:00:00      00:45:12      RUNNING\n\nOptions\n\n\n\nOption\nDescription\n\n\n\n\n--all-states\nInclude PENDING jobs (default: RUNNING only)\n\n\n\nTo also see pending jobs:\nslurm-code jobs --all-states"
   },
   {
-    "objectID": "pages/getting-started.html#prerequisites",
-    "href": "pages/getting-started.html#prerequisites",
-    "title": "Getting Started",
-    "section": "Prerequisites",
-    "text": "Prerequisites\n\nSSH keys set up for login to GenomeDK without password:\nVSCode with the Remote - SSH extension installed\nAn SSH host alias configured in ~/.ssh/config for the GenomeDK login node (default alias: gdk):\n\nHost gdk\n    HostName login.genome.au.dk\n    User your_username",
-    "crumbs": [
-      "Getting Started"
-    ]
+    "objectID": "pages/managing-jobs.html#cancelling-jobs",
+    "href": "pages/managing-jobs.html#cancelling-jobs",
+    "title": "Managing Jobs",
+    "section": "Cancelling jobs",
+    "text": "Cancelling jobs\nThe cancel command cancels slurm-code managed jobs.\n\nCancel by job ID\nslurm-code cancel 1234567\n\n\nCancel by name\nYou can use the directory basename (without the sc- prefix):\nslurm-code cancel my-project\nOr the full job name:\nslurm-code cancel sc-my-project\n\n\nCancel all jobs\nslurm-code cancel --all\n\n\nOptions\n\n\n\nArgument/Option\nDescription\n\n\n\n\nJOB_ID_OR_NAME\nA job ID (numeric) or job name to cancel\n\n\n--all\nCancel all slurm-code managed jobs"
   },
   {
-    "objectID": "pages/getting-started.html#quick-start",
-    "href": "pages/getting-started.html#quick-start",
-    "title": "Getting Started",
-    "section": "Quick start",
-    "text": "Quick start\nSubmit a job and open a remote VSCode window on the allocated node:\nslurm-code submit ~/my-project\nThis will:\n\nSubmit an sbatch job on GenomeDK with default resources (1 CPU, 8 GB memory, 8-hour walltime)\nWait for the job to start and the node to accept SSH connections\nOpen VSCode connected to ~/my-project on the compute node",
-    "crumbs": [
-      "Getting Started"
-    ]
-  },
-  {
-    "objectID": "pages/getting-started.html#global-options",
-    "href": "pages/getting-started.html#global-options",
-    "title": "Getting Started",
-    "section": "Global options",
-    "text": "Global options\nAll subcommands accept the --host / -H option to specify which SSH host alias to use:\nslurm-code -H my-cluster submit ~/project\n\n\n\nOption\nDefault\nDescription\n\n\n\n\n-H, --host\ngdk\nSSH host alias from ~/.ssh/config",
-    "crumbs": [
-      "Getting Started"
-    ]
-  },
-  {
-    "objectID": "pages/getting-started.html#commands",
-    "href": "pages/getting-started.html#commands",
-    "title": "Getting Started",
-    "section": "Commands",
-    "text": "Commands\n\n\n\nCommand\nDescription\n\n\n\n\nsubmit\nSubmit a SLURM job and open VSCode on the node. Full documentation\n\n\nprofiles\nShow available submit profiles\n\n\njobs\nList running slurm-code jobs\n\n\ncancel\nCancel slurm-code jobs\n\n\nreconnect\nReconnect VSCode to a running job",
-    "crumbs": [
-      "Getting Started"
-    ]
-  },
-  {
-    "objectID": "pages/submit.html",
-    "href": "pages/submit.html",
-    "title": "Submit Jobs",
-    "section": "",
-    "text": "The submit command creates a SLURM job, waits for a node to be allocated and ready, then opens VSCode connected to that node.",
-    "crumbs": [
-      "Submit Jobs"
-    ]
-  },
-  {
-    "objectID": "pages/submit.html#usage",
-    "href": "pages/submit.html#usage",
-    "title": "Submit Jobs",
-    "section": "Usage",
-    "text": "Usage\nslurm-code submit [OPTIONS] [DIRECTORY]\nDIRECTORY is an optional path on the remote host to open in VSCode. Relative paths are resolved relative to $HOME. If omitted, VSCode opens the welcome screen on the allocated node.",
-    "crumbs": [
-      "Submit Jobs"
-    ]
-  },
-  {
-    "objectID": "pages/submit.html#examples",
-    "href": "pages/submit.html#examples",
-    "title": "Submit Jobs",
-    "section": "Examples",
-    "text": "Examples\nSubmit with default settings and open a project directory:\nslurm-code submit ~/my-project\nRequest more memory and a longer walltime:\nslurm-code submit -m 16g -t 12:00:00 ~/my-project\nSubmit to the GPU partition with a named profile:\nslurm-code submit -P gpu ~/my-project\nOverride a profile’s walltime from the command line:\nslurm-code submit -P gpu -t 24:00:00 ~/my-project\nSubmit without opening a specific directory:\nslurm-code submit -A my_account",
-    "crumbs": [
-      "Submit Jobs"
-    ]
-  },
-  {
-    "objectID": "pages/submit.html#options",
-    "href": "pages/submit.html#options",
-    "title": "Submit Jobs",
-    "section": "Options",
-    "text": "Options\n\nResource allocation\n\n\n\nOption\nDefault\nDescription\n\n\n\n\n-A, --account\n\nCharge job to specified account\n\n\n-c, --cpus-per-task\n1\nCPUs per task\n\n\n-n, --ntasks\n1\nNumber of tasks\n\n\n-N, --nodes\n\nNumber of nodes (N or min-max)\n\n\n--ntasks-per-node\n\nTasks per node\n\n\n--mincpus\n\nMinimum logical processors per node\n\n\n--cpus-per-gpu\n\nCPUs per allocated GPU\n\n\n\n\n\nMemory\n\n\n\nOption\nDefault\nDescription\n\n\n\n\n-m, --mem-per-cpu\n8g\nMemory per allocated CPU\n\n\n--mem\n\nMinimum total real memory (e.g. 4g)\n\n\n\n\n\nTime and scheduling\n\n\n\nOption\nDefault\nDescription\n\n\n\n\n-t, --walltime\n08:00:00\nTime limit (e.g. 08:00:00)\n\n\n-p, --partition\n\nPartition requested\n\n\n\n\n\nJob identity\n\n\n\n\n\n\n\n\nOption\nDefault\nDescription\n\n\n\n\n-J, --job-name\nsc-&lt;dirname&gt;\nJob name (auto-derived from directory if not set)\n\n\n-e, --error\n\nFile for batch script’s standard error\n\n\n\n\n\nNode selection\n\n\n\nOption\nDescription\n\n\n\n\n-w, --nodelist\nRequest specific hosts\n\n\n-x, --exclude\nExclude specific hosts\n\n\n--use-min-nodes\nPrefer smaller node count\n\n\n\n\n\nJob behaviour\n\n\n\nOption\nDescription\n\n\n\n\n--requeue\nPermit the job to be requeued\n\n\n--no-requeue\nDo not requeue the job\n\n\n--oom-kill-step\nOOMKillStep behaviour (0 or 1)\n\n\n--thread-spec\nCount of reserved threads\n\n\n\n\n\nEnvironment\n\n\n\nOption\nDescription\n\n\n\n\n--pixi\nActivate the pixi environment from DIRECTORY on the allocated node\n\n\n\n\nSLURM environment variables\nWhen a DIRECTORY is given, slurm-code writes the job’s SLURM environment variables (such as VS_SLURM_JOB_ID, VS_SLURM_CPUS_PER_TASK, VS_SLURM_MEM_PER_CPU, etc.) to &lt;DIRECTORY&gt;/.slurm-code-slurm-env.sh. These use a VS_ prefix to avoid colliding with native SLURM variables (which would interfere with sbatch and srun). The variables are available in VSCode integrated terminals, which would otherwise not have them since they run outside the job’s process tree.\n\n\nPixi activation\nWhen --pixi is used, slurm-code runs pixi shell-hook in the project directory and writes the activation commands to &lt;DIRECTORY&gt;/.slurm-code-pixi-env.sh. You can also set pixi = true in a submit profile to always activate pixi for that profile.\n\n\nBashrc hook\nOn first use, you will be prompted to add a source line to ~/.bashrc on the cluster:\n[ -f ~/.slurm-code-env.sh ] && source ~/.slurm-code-env.sh\nThe bashrc hook does two things:\n\nSources ~/.slurm-code-env.sh (a loader that is overwritten on each submit with absolute paths to the current project’s SLURM env script). This provides variables like VS_SLURM_JOB_ID and VS_SLURM_MEM_PER_CPU in every shell.\nSources .slurm-code-pixi-env.sh using a relative path, so pixi activation only happens when the shell starts in the project directory (as VSCode integrated terminals do). A regular SSH login starts in ~ and is unaffected.\n\n\n\n\nProfiles\n\n\n\n\n\n\n\nOption\nDescription\n\n\n\n\n-P, --profile\nApply a named submit profile from the config file\n\n\n\nSee Submit Profiles for details on setting up and using profiles.",
-    "crumbs": [
-      "Submit Jobs"
-    ]
-  },
-  {
-    "objectID": "pages/submit.html#what-happens-when-you-submit",
-    "href": "pages/submit.html#what-happens-when-you-submit",
-    "title": "Submit Jobs",
-    "section": "What happens when you submit",
-    "text": "What happens when you submit\n\nThe remote directory is verified on the host (if specified)\nAn sbatch command is built from CLI flags, profile values, and defaults\nThe job is submitted via SSH\nslurm-code polls squeue until the job enters RUNNING state\nSSH connectivity to the allocated node is verified\nSLURM environment variables are written to the project directory\nIf --pixi is set, the pixi environment activation script is generated\nBashrc hooks are configured (prompts on first use)\nVSCode opens with a remote connection to the node",
-    "crumbs": [
-      "Submit Jobs"
-    ]
-  },
-  {
-    "objectID": "pages/submit.html#job-naming",
-    "href": "pages/submit.html#job-naming",
-    "title": "Submit Jobs",
-    "section": "Job naming",
-    "text": "Job naming\nJobs are automatically named sc-&lt;dirname&gt; based on the directory basename. For example, submitting ~/projects/my-analysis creates a job named sc-my-analysis. If no directory is given, the name is sc-&lt;timestamp&gt;. You can override this with --job-name.\nThe sc- prefix is how slurm-code identifies its own jobs for the jobs, cancel, and connect commands.",
-    "crumbs": [
-      "Submit Jobs"
-    ]
+    "objectID": "pages/managing-jobs.html#reconnecting-to-a-job",
+    "href": "pages/managing-jobs.html#reconnecting-to-a-job",
+    "title": "Managing Jobs",
+    "section": "Reconnecting to a job",
+    "text": "Reconnecting to a job\nIf VSCode disconnects or you close the window, use reconnect to reopen it on the same node:\nslurm-code reconnect ~/my-project\nThis finds the running job that matches the directory name and opens VSCode on its allocated node. Relative paths are resolved relative to $HOME.\nIf multiple jobs match the directory name, you’ll be prompted to select one:\nMultiple matching jobs found:\n  [1] 1234567  01:23:45  RUNNING\n  [2] 1234568  00:45:12  RUNNING\nSelect job number:\n\nUsage\nslurm-code reconnect DIRECTORY\n\n\n\nArgument\nDescription\n\n\n\n\nDIRECTORY\nPath on the remote host (used to match the job name)"
   }
 ]

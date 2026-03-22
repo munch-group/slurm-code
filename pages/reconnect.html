@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Submitting Jobs – slurm-code</title>
+<title>Reconnecting to Jobs – slurm-code</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -68,8 +68,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../">
-<link href="../pages/jobs.html" rel="next">
-<link href="../pages/getting-started.html" rel="prev">
+<link href="../pages/profiles.html" rel="next">
+<link href="../pages/cancel.html" rel="prev">
 <script src="../site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
 <script src="../site_libs/quarto-html/popper.min.js"></script>
@@ -145,7 +145,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../pages/submit.html">Submitting Jobs</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../pages/reconnect.html">Reconnecting to Jobs</a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
     </div>
@@ -165,7 +165,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../pages/submit.html" class="sidebar-item-text sidebar-link active">
+  <a href="../pages/submit.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Submitting Jobs</span></a>
   </div>
 </li>
@@ -183,7 +183,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../pages/reconnect.html" class="sidebar-item-text sidebar-link">
+  <a href="../pages/reconnect.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text">Reconnecting to Jobs</span></a>
   </div>
 </li>
@@ -203,21 +203,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#usage" id="toc-usage" class="nav-link active" data-scroll-target="#usage">Usage</a></li>
-  <li><a href="#examples" id="toc-examples" class="nav-link" data-scroll-target="#examples">Examples</a></li>
-  <li><a href="#options" id="toc-options" class="nav-link" data-scroll-target="#options">Options</a>
+  <li><a href="#reconnecting-to-a-job" id="toc-reconnecting-to-a-job" class="nav-link active" data-scroll-target="#reconnecting-to-a-job">Reconnecting to a job</a>
   <ul class="collapse">
-  <li><a href="#resource-allocation" id="toc-resource-allocation" class="nav-link" data-scroll-target="#resource-allocation">Resource allocation</a></li>
-  <li><a href="#memory" id="toc-memory" class="nav-link" data-scroll-target="#memory">Memory</a></li>
-  <li><a href="#time-and-scheduling" id="toc-time-and-scheduling" class="nav-link" data-scroll-target="#time-and-scheduling">Time and scheduling</a></li>
-  <li><a href="#job-identity" id="toc-job-identity" class="nav-link" data-scroll-target="#job-identity">Job identity</a></li>
-  <li><a href="#node-selection" id="toc-node-selection" class="nav-link" data-scroll-target="#node-selection">Node selection</a></li>
-  <li><a href="#job-behaviour" id="toc-job-behaviour" class="nav-link" data-scroll-target="#job-behaviour">Job behaviour</a></li>
-  <li><a href="#environment" id="toc-environment" class="nav-link" data-scroll-target="#environment">Environment</a></li>
-  <li><a href="#profiles" id="toc-profiles" class="nav-link" data-scroll-target="#profiles">Profiles</a></li>
+  <li><a href="#usage" id="toc-usage" class="nav-link" data-scroll-target="#usage">Usage</a></li>
   </ul></li>
-  <li><a href="#what-happens-when-you-submit" id="toc-what-happens-when-you-submit" class="nav-link" data-scroll-target="#what-happens-when-you-submit">What happens when you submit</a></li>
-  <li><a href="#job-naming" id="toc-job-naming" class="nav-link" data-scroll-target="#job-naming">Job naming</a></li>
   </ul>
 </nav>
     </div>
@@ -226,7 +215,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Submitting Jobs</h1>
+<h1 class="title">Reconnecting to Jobs</h1>
 </div>
 
 
@@ -243,285 +232,37 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<p>The <code>submit</code> command creates a SLURM job, waits for a node to be allocated and ready, then opens VSCode connected to that node.</p>
-<section id="usage" class="level2">
-<h2 class="anchored" data-anchor-id="usage">Usage</h2>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">slurm-code</span> submit <span class="pp">[</span><span class="ss">OPTIONS</span><span class="pp">]</span> <span class="pp">[</span><span class="ss">DIRECTORY</span><span class="pp">]</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p><code>DIRECTORY</code> is an optional path on the remote host to open in VSCode. Relative paths are resolved relative to <code>$HOME</code>. If omitted, VSCode opens the welcome screen on the allocated node.</p>
-</section>
-<section id="examples" class="level2">
-<h2 class="anchored" data-anchor-id="examples">Examples</h2>
-<p>Submit with default settings and open a project directory:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="ex">slurm-code</span> submit ~/my-project</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p>Request more memory and a longer walltime:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="ex">slurm-code</span> submit <span class="at">-m</span> 16g <span class="at">-t</span> 12:00:00 ~/my-project</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p>Submit to the GPU partition with a named profile:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="ex">slurm-code</span> submit <span class="at">-P</span> gpu ~/my-project</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p>Override a profile’s walltime from the command line:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="ex">slurm-code</span> submit <span class="at">-P</span> gpu <span class="at">-t</span> 24:00:00 ~/my-project</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p>Submit without opening a specific directory:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="ex">slurm-code</span> submit <span class="at">-A</span> my_account</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</section>
-<section id="options" class="level2">
-<h2 class="anchored" data-anchor-id="options">Options</h2>
-<section id="resource-allocation" class="level3">
-<h3 class="anchored" data-anchor-id="resource-allocation">Resource allocation</h3>
+<p>slurm-code provides commands to list, cancel, and reconnect to jobs that were submitted through <code>slurm-code submit</code>. These commands identify managed jobs by their <code>sc-</code> name prefix.</p>
+<section id="reconnecting-to-a-job" class="level2">
+<h2 class="anchored" data-anchor-id="reconnecting-to-a-job">Reconnecting to a job</h2>
+<p>If VSCode disconnects or you close the window, use <code>reconnect</code> to reopen it on the same node:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">slurm-code</span> reconnect ~/my-project</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>This finds the running job that matches the directory name and opens VSCode on its allocated node. Relative paths are resolved relative to <code>$HOME</code>.</p>
+<p>If multiple jobs match the directory name, you’ll be prompted to select one:</p>
+<pre><code>Multiple matching jobs found:
+  [1] 1234567  01:23:45  RUNNING
+  [2] 1234568  00:45:12  RUNNING
+Select job number:</code></pre>
+<section id="usage" class="level3">
+<h3 class="anchored" data-anchor-id="usage">Usage</h3>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="ex">slurm-code</span> reconnect DIRECTORY</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <table class="caption-top table">
 <thead>
 <tr class="header">
-<th>Option</th>
-<th>Default</th>
+<th>Argument</th>
 <th>Description</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td><code>-A</code>, <code>--account</code></td>
-<td></td>
-<td>Charge job to specified account</td>
-</tr>
-<tr class="even">
-<td><code>-c</code>, <code>--cpus-per-task</code></td>
-<td><code>1</code></td>
-<td>CPUs per task</td>
-</tr>
-<tr class="odd">
-<td><code>-n</code>, <code>--ntasks</code></td>
-<td><code>1</code></td>
-<td>Number of tasks</td>
-</tr>
-<tr class="even">
-<td><code>-N</code>, <code>--nodes</code></td>
-<td></td>
-<td>Number of nodes (<code>N</code> or <code>min-max</code>)</td>
-</tr>
-<tr class="odd">
-<td><code>--ntasks-per-node</code></td>
-<td></td>
-<td>Tasks per node</td>
-</tr>
-<tr class="even">
-<td><code>--mincpus</code></td>
-<td></td>
-<td>Minimum logical processors per node</td>
-</tr>
-<tr class="odd">
-<td><code>--cpus-per-gpu</code></td>
-<td></td>
-<td>CPUs per allocated GPU</td>
+<td><code>DIRECTORY</code></td>
+<td>Path on the remote host (used to match the job name)</td>
 </tr>
 </tbody>
 </table>
-</section>
-<section id="memory" class="level3">
-<h3 class="anchored" data-anchor-id="memory">Memory</h3>
-<table class="caption-top table">
-<thead>
-<tr class="header">
-<th>Option</th>
-<th>Default</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><code>-m</code>, <code>--mem-per-cpu</code></td>
-<td><code>8g</code></td>
-<td>Memory per allocated CPU</td>
-</tr>
-<tr class="even">
-<td><code>--mem</code></td>
-<td></td>
-<td>Minimum total real memory (e.g.&nbsp;<code>4g</code>)</td>
-</tr>
-</tbody>
-</table>
-</section>
-<section id="time-and-scheduling" class="level3">
-<h3 class="anchored" data-anchor-id="time-and-scheduling">Time and scheduling</h3>
-<table class="caption-top table">
-<thead>
-<tr class="header">
-<th>Option</th>
-<th>Default</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><code>-t</code>, <code>--walltime</code></td>
-<td><code>08:00:00</code></td>
-<td>Time limit (e.g.&nbsp;<code>08:00:00</code>)</td>
-</tr>
-<tr class="even">
-<td><code>-p</code>, <code>--partition</code></td>
-<td></td>
-<td>Partition requested</td>
-</tr>
-</tbody>
-</table>
-</section>
-<section id="job-identity" class="level3">
-<h3 class="anchored" data-anchor-id="job-identity">Job identity</h3>
-<table class="caption-top table">
-<colgroup>
-<col style="width: 26%">
-<col style="width: 30%">
-<col style="width: 43%">
-</colgroup>
-<thead>
-<tr class="header">
-<th>Option</th>
-<th>Default</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><code>-J</code>, <code>--job-name</code></td>
-<td><code>sc-&lt;dirname&gt;</code></td>
-<td>Job name (auto-derived from directory if not set)</td>
-</tr>
-<tr class="even">
-<td><code>-e</code>, <code>--error</code></td>
-<td></td>
-<td>File for batch script’s standard error</td>
-</tr>
-</tbody>
-</table>
-</section>
-<section id="node-selection" class="level3">
-<h3 class="anchored" data-anchor-id="node-selection">Node selection</h3>
-<table class="caption-top table">
-<thead>
-<tr class="header">
-<th>Option</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><code>-w</code>, <code>--nodelist</code></td>
-<td>Request specific hosts</td>
-</tr>
-<tr class="even">
-<td><code>-x</code>, <code>--exclude</code></td>
-<td>Exclude specific hosts</td>
-</tr>
-<tr class="odd">
-<td><code>--use-min-nodes</code></td>
-<td>Prefer smaller node count</td>
-</tr>
-</tbody>
-</table>
-</section>
-<section id="job-behaviour" class="level3">
-<h3 class="anchored" data-anchor-id="job-behaviour">Job behaviour</h3>
-<table class="caption-top table">
-<thead>
-<tr class="header">
-<th>Option</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><code>--requeue</code></td>
-<td>Permit the job to be requeued</td>
-</tr>
-<tr class="even">
-<td><code>--no-requeue</code></td>
-<td>Do not requeue the job</td>
-</tr>
-<tr class="odd">
-<td><code>--oom-kill-step</code></td>
-<td>OOMKillStep behaviour (<code>0</code> or <code>1</code>)</td>
-</tr>
-<tr class="even">
-<td><code>--thread-spec</code></td>
-<td>Count of reserved threads</td>
-</tr>
-</tbody>
-</table>
-</section>
-<section id="environment" class="level3">
-<h3 class="anchored" data-anchor-id="environment">Environment</h3>
-<table class="caption-top table">
-<thead>
-<tr class="header">
-<th>Option</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><code>--pixi</code></td>
-<td>Activate the <a href="https://pixi.sh">pixi</a> environment from DIRECTORY on the allocated node</td>
-</tr>
-</tbody>
-</table>
-<section id="slurm-environment-variables" class="level4">
-<h4 class="anchored" data-anchor-id="slurm-environment-variables">SLURM environment variables</h4>
-<p>When a <code>DIRECTORY</code> is given, slurm-code writes the job’s SLURM environment variables (such as <code>VS_SLURM_JOB_ID</code>, <code>VS_SLURM_CPUS_PER_TASK</code>, <code>VS_SLURM_MEM_PER_CPU</code>, etc.) to <code>&lt;DIRECTORY&gt;/.slurm-code-slurm-env.sh</code>. These use a <code>VS_</code> prefix to avoid colliding with native SLURM variables (which would interfere with <code>sbatch</code> and <code>srun</code>). The variables are available in VSCode integrated terminals, which would otherwise not have them since they run outside the job’s process tree.</p>
-</section>
-<section id="pixi-activation" class="level4">
-<h4 class="anchored" data-anchor-id="pixi-activation">Pixi activation</h4>
-<p>When <code>--pixi</code> is used, slurm-code runs <code>pixi shell-hook</code> in the project directory and writes the activation commands to <code>&lt;DIRECTORY&gt;/.slurm-code-pixi-env.sh</code>. You can also set <code>pixi = true</code> in a <a href="../pages/profiles.html">submit profile</a> to always activate pixi for that profile.</p>
-</section>
-<section id="bashrc-hook" class="level4">
-<h4 class="anchored" data-anchor-id="bashrc-hook">Bashrc hook</h4>
-<p>On first use, you will be prompted to add a source line to <code>~/.bashrc</code> on the cluster:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="bu">[</span> <span class="ot">-f</span> ~/.slurm-code-env.sh <span class="bu">]</span> <span class="kw">&amp;&amp;</span> <span class="bu">source</span> ~/.slurm-code-env.sh</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p>The bashrc hook does two things:</p>
-<ol type="1">
-<li>Sources <code>~/.slurm-code-env.sh</code> (a loader that is overwritten on each submit with absolute paths to the current project’s SLURM env script). This provides variables like <code>VS_SLURM_JOB_ID</code> and <code>VS_SLURM_MEM_PER_CPU</code> in every shell.</li>
-<li>Sources <code>.slurm-code-pixi-env.sh</code> using a <strong>relative</strong> path, so pixi activation only happens when the shell starts in the project directory (as VSCode integrated terminals do). A regular SSH login starts in <code>~</code> and is unaffected.</li>
-</ol>
-</section>
-</section>
-<section id="profiles" class="level3">
-<h3 class="anchored" data-anchor-id="profiles">Profiles</h3>
-<table class="caption-top table">
-<colgroup>
-<col style="width: 38%">
-<col style="width: 61%">
-</colgroup>
-<thead>
-<tr class="header">
-<th>Option</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><code>-P</code>, <code>--profile</code></td>
-<td>Apply a named submit profile from the config file</td>
-</tr>
-</tbody>
-</table>
-<p>See <a href="../pages/profiles.html">Submit Profiles</a> for details on setting up and using profiles.</p>
-</section>
-</section>
-<section id="what-happens-when-you-submit" class="level2">
-<h2 class="anchored" data-anchor-id="what-happens-when-you-submit">What happens when you submit</h2>
-<ol type="1">
-<li>The remote directory is verified on the host (if specified)</li>
-<li>An <code>sbatch</code> command is built from CLI flags, profile values, and defaults</li>
-<li>The job is submitted via SSH</li>
-<li>slurm-code polls <code>squeue</code> until the job enters RUNNING state</li>
-<li>SSH connectivity to the allocated node is verified</li>
-<li>SLURM environment variables are written to the project directory</li>
-<li>If <code>--pixi</code> is set, the pixi environment activation script is generated</li>
-<li>Bashrc hooks are configured (prompts on first use)</li>
-<li>VSCode opens with a remote connection to the node</li>
-</ol>
-</section>
-<section id="job-naming" class="level2">
-<h2 class="anchored" data-anchor-id="job-naming">Job naming</h2>
-<p>Jobs are automatically named <code>sc-&lt;dirname&gt;</code> based on the directory basename. For example, submitting <code>~/projects/my-analysis</code> creates a job named <code>sc-my-analysis</code>. If no directory is given, the name is <code>sc-&lt;timestamp&gt;</code>. You can override this with <code>--job-name</code>.</p>
-<p>The <code>sc-</code> prefix is how slurm-code identifies its own jobs for the <code>jobs</code>, <code>cancel</code>, and <code>connect</code> commands.</p>
 
 
+</section>
 </section>
 
 </main> <!-- /main -->
@@ -927,13 +668,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="../pages/getting-started.html" class="pagination-link" aria-label="Getting Started">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Getting Started</span>
+      <a href="../pages/cancel.html" class="pagination-link" aria-label="Cancel Jobs">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Cancel Jobs</span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="../pages/jobs.html" class="pagination-link" aria-label="Listing Jobs">
-        <span class="nav-page-text">Listing Jobs</span> <i class="bi bi-arrow-right-short"></i>
+      <a href="../pages/profiles.html" class="pagination-link" aria-label="Submit Profiles">
+        <span class="nav-page-text">Submit Profiles</span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
