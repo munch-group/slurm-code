@@ -61,6 +61,7 @@ ipython = "*"
 seaborn = "*"
 nbdime = "*"
 r-rsvg = "*"
+tqdm = ">=4.67.3,<5"
 
 # [tool.pixi.pypi-dependencies]
 # slurm-code = { path = ".", editable = true }

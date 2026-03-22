@@ -187,15 +187,15 @@ LOADER_SCRIPT = ".slurm-code-env.sh"  # written to ~ on each submit
 
 # Mapping from scontrol field names to SLURM environment variable names
 _SCONTROL_TO_ENV = {
-    "JobId": "SLURM_JOB_ID",
-    "JobName": "SLURM_JOB_NAME",
-    "Partition": "SLURM_JOB_PARTITION",
-    "Account": "SLURM_JOB_ACCOUNT",
-    "NumNodes": "SLURM_JOB_NUM_NODES",
-    "NumCPUs": "SLURM_CPUS_ON_NODE",
-    "NodeList": "SLURM_JOB_NODELIST",
-    "TimeLimit": "SLURM_TIMELIMIT",
-    "WorkDir": "SLURM_SUBMIT_DIR",
+    "JobId": "VS_SLURM_JOB_ID",
+    "JobName": "VS_SLURM_JOB_NAME",
+    "Partition": "VS_SLURM_JOB_PARTITION",
+    "Account": "VS_SLURM_JOB_ACCOUNT",
+    "NumNodes": "VS_SLURM_JOB_NUM_NODES",
+    "NumCPUs": "VS_SLURM_CPUS_ON_NODE",
+    "NodeList": "VS_SLURM_JOB_NODELIST",
+    "TimeLimit": "VS_SLURM_TIMELIMIT",
+    "WorkDir": "VS_SLURM_SUBMIT_DIR",
 }
 
 
@@ -243,17 +243,17 @@ def setup_slurm_env(jobid, directory, host="gdk"):
             unit = match.group(2).upper()
             multipliers = {"": 1, "K": 1, "M": 1, "G": 1024, "T": 1024 * 1024}
             mb_value = num * multipliers.get(unit, 1)
-            lines.append(f"export SLURM_MEM_PER_CPU={mb_value!r}")
+            lines.append(f"export VS_SLURM_MEM_PER_CPU={mb_value!r}")
 
     # CPUs per task from ReqTRES or TresPerTask
     cpus_per_task = fields.get("CPUs/Task")
     if cpus_per_task:
-        lines.append(f"export SLURM_CPUS_PER_TASK={cpus_per_task!r}")
+        lines.append(f"export VS_SLURM_CPUS_PER_TASK={cpus_per_task!r}")
 
     # NTasks
     ntasks = fields.get("NumTasks")
     if ntasks:
-        lines.append(f"export SLURM_NTASKS={ntasks!r}")
+        lines.append(f"export VS_SLURM_NTASKS={ntasks!r}")
 
     script_content = "\n".join(lines) + "\n"
     script_path = f"{directory}/{SLURM_ENV_SCRIPT}"

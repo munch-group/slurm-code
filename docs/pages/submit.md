@@ -104,7 +104,7 @@ slurm-code submit -A my_account
 
 #### SLURM environment variables
 
-When a `DIRECTORY` is given, slurm-code writes the job's SLURM environment variables (such as `SLURM_JOB_ID`, `SLURM_CPUS_PER_TASK`, `SLURM_MEM_PER_CPU`, etc.) to `<DIRECTORY>/.slurm-code-slurm-env.sh`. This makes the variables available in VSCode integrated terminals, which would otherwise not have them since they run outside the job's process tree.
+When a `DIRECTORY` is given, slurm-code writes the job's SLURM environment variables (such as `VS_SLURM_JOB_ID`, `VS_SLURM_CPUS_PER_TASK`, `VS_SLURM_MEM_PER_CPU`, etc.) to `<DIRECTORY>/.slurm-code-slurm-env.sh`. These use a `VS_` prefix to avoid colliding with native SLURM variables (which would interfere with `sbatch` and `srun`). The variables are available in VSCode integrated terminals, which would otherwise not have them since they run outside the job's process tree.
 
 #### Pixi activation
 
@@ -120,7 +120,7 @@ On first use, you will be prompted to add a source line to `~/.bashrc` on the cl
 
 The bashrc hook does two things:
 
-1. Sources `~/.slurm-code-env.sh` (a loader that is overwritten on each submit with absolute paths to the current project's SLURM env script). This provides SLURM variables like `SLURM_JOB_ID` and `SLURM_MEM_PER_CPU` in every shell.
+1. Sources `~/.slurm-code-env.sh` (a loader that is overwritten on each submit with absolute paths to the current project's SLURM env script). This provides variables like `VS_SLURM_JOB_ID` and `VS_SLURM_MEM_PER_CPU` in every shell.
 2. Sources `.slurm-code-pixi-env.sh` using a **relative** path, so pixi activation only happens when the shell starts in the project directory (as VSCode integrated terminals do). A regular SSH login starts in `~` and is unaffected.
 
 ### Profiles
