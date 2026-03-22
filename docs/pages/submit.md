@@ -1,5 +1,5 @@
 ---
-title: Submit Jobs
+title: Submitting Jobs
 ---
 
 The `submit` command creates a SLURM job, waits for a node to be allocated and ready, then opens VSCode connected to that node.
