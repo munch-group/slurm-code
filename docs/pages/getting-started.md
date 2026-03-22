@@ -33,10 +33,9 @@ pip install slurm-code
 
 ## Prerequisites
 
-- An SSH host alias configured in `~/.ssh/config` for the GenomeDK login node (default alias: `gdk`)
-- [VSCode](https://code.visualstudio.com/) with the [Remote - SSH](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-ssh) extension installed
-
-A minimal SSH config entry:
+1. SSH keys set up for [login to GenomeDK without password](https://genome.au.dk/docs/getting-started/#public-key-authentication): 
+2. [VSCode](https://code.visualstudio.com/) with the [Remote - SSH](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-ssh) extension installed
+3. An SSH host alias configured in `~/.ssh/config` for the GenomeDK login node (default alias: `gdk`):
 
 ```
 Host gdk
@@ -74,7 +73,7 @@ slurm-code -H my-cluster submit ~/project
 
 | Command | Description |
 |---------|-------------|
-| [`submit`](submit.md) | Submit a SLURM job and open VSCode on the node |
+| [`submit`](submit.md) | Submit a SLURM job and open VSCode on the node. [Full documentation](submit.md) |
 | [`profiles`](profiles.md) | Show available submit profiles |
 | [`jobs`](managing-jobs.md#listing-jobs) | List running slurm-code jobs |
 | [`cancel`](managing-jobs.md#cancelling-jobs) | Cancel slurm-code jobs |

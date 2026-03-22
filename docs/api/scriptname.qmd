@@ -1,6 +1,0 @@
-# scriptname { #slurm_code.modulename.scriptname }
-
-```python
-slurm_code.modulename.scriptname()
-```
-

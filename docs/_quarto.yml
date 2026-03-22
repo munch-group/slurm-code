@@ -40,11 +40,11 @@ website:
   title: "slurm-code"
   page-navigation: true
   navbar:
-    left:
-      - href: api/
-        text: API reference
-      # - href: gallery/
-      #   text: Gallery
+    # left:
+    #   - href: api/
+    #     text: API reference
+    #   # - href: gallery/
+    #   #   text: Gallery
     right:
       - icon: github
         href: https://github.com/munch-group/slurm-code/
@@ -56,8 +56,10 @@ website:
       contents:
         - pages/getting-started.md
         - pages/submit.md
+        - pages/jobs.md
+        - pages/cancel.md
+        - pages/reconnect.md
         - pages/profiles.md
-        - pages/managing-jobs.md
 
 lightbox: true
 
@@ -65,7 +67,7 @@ format:
   html:
     theme: cosmo
     css:
-      - api/_styles-quartodoc.css
+      # - api/_styles-quartodoc.css
       - styles.css
       # - custom.scss
     toc: true
@@ -75,29 +77,29 @@ format:
     mermaid:
       theme: neutral 
 
-quartodoc:
-  package: slurm-code
-  style: pkgdown
-  dir: api
-  render_interlinks: true
-  options:
-    signature_name: full
-  renderer:
-    style: markdown
-    table_style: description-list
-  sidebar: "api/_sidebar.yml"
-  css: "api/_styles-quartodoc.css"
+# quartodoc:
+#   package: slurm-code
+#   style: pkgdown
+#   dir: api
+#   render_interlinks: true
+#   options:
+#     signature_name: full
+#   renderer:
+#     style: markdown
+#     table_style: description-list
+#   sidebar: "api/_sidebar.yml"
+#   css: "api/_styles-quartodoc.css"
 
-  sections:
-    - title: Some section
-      package: slurm_code.modulename
-      desc: |
-        Some description...
-      contents:
-        - functionname
-    - title: Some other section
-      package: slurm_code.modulename
-      desc: |
-        Some description...
-      contents:
-        - scriptname
+#   sections:
+#     - title: Some section
+#       package: slurm_code.modulename
+#       desc: |
+#         Some description...
+#       contents:
+#         - functionname
+#     - title: Some other section
+#       package: slurm_code.modulename
+#       desc: |
+#         Some description...
+#       contents:
+#         - scriptname
