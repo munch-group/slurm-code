@@ -1,23 +1,31 @@
 [
   {
-    "objectID": "pages/jobs.html",
-    "href": "pages/jobs.html",
-    "title": "Listing Jobs",
+    "objectID": "pages/managing-jobs.html",
+    "href": "pages/managing-jobs.html",
+    "title": "Managing Jobs",
     "section": "",
-    "text": "slurm-code provides commands to list, cancel, and reconnect to jobs that were submitted through slurm-code submit. These commands identify managed jobs by their sc- name prefix.",
-    "crumbs": [
-      "Listing Jobs"
-    ]
+    "text": "slurm-code provides commands to list, cancel, and reconnect to jobs that were submitted through slurm-code submit. These commands identify managed jobs by their sc- name prefix."
   },
   {
-    "objectID": "pages/jobs.html#listing-jobs",
-    "href": "pages/jobs.html#listing-jobs",
-    "title": "Listing Jobs",
+    "objectID": "pages/managing-jobs.html#listing-jobs",
+    "href": "pages/managing-jobs.html#listing-jobs",
+    "title": "Managing Jobs",
     "section": "Listing jobs",
-    "text": "Listing jobs\nThe jobs command shows your running slurm-code jobs:\nslurm-code jobs\nExample output:\n     JOBID  NAME                            PARTITION     REQMEM    CPUS    TIMELIMIT     ELAPSED       STATE\n----------------------------------------------------------------------------------------------------------\n   1234567  sc-my-project                   normal        8Gn       1       08:00:00      01:23:45      RUNNING\n   1234568  sc-analysis                     normal        16Gn      4       12:00:00      00:45:12      RUNNING\n\nOptions\n\n\n\nOption\nDescription\n\n\n\n\n--all-states\nInclude PENDING jobs (default: RUNNING only)\n\n\n\nTo also see pending jobs:\nslurm-code jobs --all-states",
-    "crumbs": [
-      "Listing Jobs"
-    ]
+    "text": "Listing jobs\nThe jobs command shows your running slurm-code jobs:\nslurm-code jobs\nExample output:\n     JOBID  NAME                            PARTITION     REQMEM    CPUS    TIMELIMIT     ELAPSED       STATE\n----------------------------------------------------------------------------------------------------------\n   1234567  sc-my-project                   normal        8Gn       1       08:00:00      01:23:45      RUNNING\n   1234568  sc-analysis                     normal        16Gn      4       12:00:00      00:45:12      RUNNING\n\nOptions\n\n\n\nOption\nDescription\n\n\n\n\n--all-states\nInclude PENDING jobs (default: RUNNING only)\n\n\n\nTo also see pending jobs:\nslurm-code jobs --all-states"
+  },
+  {
+    "objectID": "pages/managing-jobs.html#cancelling-jobs",
+    "href": "pages/managing-jobs.html#cancelling-jobs",
+    "title": "Managing Jobs",
+    "section": "Cancelling jobs",
+    "text": "Cancelling jobs\nThe cancel command cancels slurm-code managed jobs.\n\nCancel by job ID\nslurm-code cancel 1234567\n\n\nCancel by name\nYou can use the directory basename (without the sc- prefix):\nslurm-code cancel my-project\nOr the full job name:\nslurm-code cancel sc-my-project\n\n\nCancel all jobs\nslurm-code cancel --all\n\n\nOptions\n\n\n\nArgument/Option\nDescription\n\n\n\n\nJOB_ID_OR_NAME\nA job ID (numeric) or job name to cancel\n\n\n--all\nCancel all slurm-code managed jobs"
+  },
+  {
+    "objectID": "pages/managing-jobs.html#reconnecting-to-a-job",
+    "href": "pages/managing-jobs.html#reconnecting-to-a-job",
+    "title": "Managing Jobs",
+    "section": "Reconnecting to a job",
+    "text": "Reconnecting to a job\nIf VSCode disconnects or you close the window, use reconnect to reopen it on the same node:\nslurm-code reconnect ~/my-project\nThis finds the running job that matches the directory name and opens VSCode on its allocated node. Relative paths are resolved relative to $HOME.\nIf multiple jobs match the directory name, you’ll be prompted to select one:\nMultiple matching jobs found:\n  [1] 1234567  01:23:45  RUNNING\n  [2] 1234568  00:45:12  RUNNING\nSelect job number:\n\nUsage\nslurm-code reconnect DIRECTORY\n\n\n\nArgument\nDescription\n\n\n\n\nDIRECTORY\nPath on the remote host (used to match the job name)"
   },
   {
     "objectID": "pages/submit.html",
@@ -80,23 +88,23 @@
     ]
   },
   {
-    "objectID": "pages/cancel.html",
-    "href": "pages/cancel.html",
-    "title": "Cancel Jobs",
+    "objectID": "pages/jobs.html",
+    "href": "pages/jobs.html",
+    "title": "Listing Jobs",
     "section": "",
     "text": "slurm-code provides commands to list, cancel, and reconnect to jobs that were submitted through slurm-code submit. These commands identify managed jobs by their sc- name prefix.",
     "crumbs": [
-      "Cancel Jobs"
+      "Listing Jobs"
     ]
   },
   {
-    "objectID": "pages/cancel.html#cancelling-jobs",
-    "href": "pages/cancel.html#cancelling-jobs",
-    "title": "Cancel Jobs",
-    "section": "Cancelling jobs",
-    "text": "Cancelling jobs\nThe cancel command cancels slurm-code managed jobs.\n\nCancel by job ID\nslurm-code cancel 1234567\n\n\nCancel by name\nYou can use the directory basename (without the sc- prefix):\nslurm-code cancel my-project\nOr the full job name:\nslurm-code cancel sc-my-project\n\n\nCancel all jobs\nslurm-code cancel --all\n\n\nOptions\n\n\n\nArgument/Option\nDescription\n\n\n\n\nJOB_ID_OR_NAME\nA job ID (numeric) or job name to cancel\n\n\n--all\nCancel all slurm-code managed jobs",
+    "objectID": "pages/jobs.html#listing-jobs",
+    "href": "pages/jobs.html#listing-jobs",
+    "title": "Listing Jobs",
+    "section": "Listing jobs",
+    "text": "Listing jobs\nThe jobs command shows your running slurm-code jobs:\nslurm-code jobs\nExample output:\n     JOBID  NAME                            PARTITION     REQMEM    CPUS    TIMELIMIT     ELAPSED       STATE\n----------------------------------------------------------------------------------------------------------\n   1234567  sc-my-project                   normal        8Gn       1       08:00:00      01:23:45      RUNNING\n   1234568  sc-analysis                     normal        16Gn      4       12:00:00      00:45:12      RUNNING\n\nOptions\n\n\n\nOption\nDescription\n\n\n\n\n--all-states\nInclude PENDING jobs (default: RUNNING only)\n\n\n\nTo also see pending jobs:\nslurm-code jobs --all-states",
     "crumbs": [
-      "Cancel Jobs"
+      "Listing Jobs"
     ]
   },
   {
@@ -117,6 +125,26 @@
     "text": "Reconnecting to a job\nIf VSCode disconnects or you close the window, use reconnect to reopen it on the same node:\nslurm-code reconnect ~/my-project\nThis finds the running job that matches the directory name and opens VSCode on its allocated node. Relative paths are resolved relative to $HOME.\nIf multiple jobs match the directory name, you’ll be prompted to select one:\nMultiple matching jobs found:\n  [1] 1234567  01:23:45  RUNNING\n  [2] 1234568  00:45:12  RUNNING\nSelect job number:\n\nUsage\nslurm-code reconnect DIRECTORY\n\n\n\nArgument\nDescription\n\n\n\n\nDIRECTORY\nPath on the remote host (used to match the job name)",
     "crumbs": [
       "Reconnecting to Jobs"
+    ]
+  },
+  {
+    "objectID": "pages/cancel.html",
+    "href": "pages/cancel.html",
+    "title": "Cancel Jobs",
+    "section": "",
+    "text": "slurm-code provides commands to list, cancel, and reconnect to jobs that were submitted through slurm-code submit. These commands identify managed jobs by their sc- name prefix.",
+    "crumbs": [
+      "Cancel Jobs"
+    ]
+  },
+  {
+    "objectID": "pages/cancel.html#cancelling-jobs",
+    "href": "pages/cancel.html#cancelling-jobs",
+    "title": "Cancel Jobs",
+    "section": "Cancelling jobs",
+    "text": "Cancelling jobs\nThe cancel command cancels slurm-code managed jobs.\n\nCancel by job ID\nslurm-code cancel 1234567\n\n\nCancel by name\nYou can use the directory basename (without the sc- prefix):\nslurm-code cancel my-project\nOr the full job name:\nslurm-code cancel sc-my-project\n\n\nCancel all jobs\nslurm-code cancel --all\n\n\nOptions\n\n\n\nArgument/Option\nDescription\n\n\n\n\nJOB_ID_OR_NAME\nA job ID (numeric) or job name to cancel\n\n\n--all\nCancel all slurm-code managed jobs",
+    "crumbs": [
+      "Cancel Jobs"
     ]
   },
   {
@@ -258,33 +286,5 @@
     "crumbs": [
       "Submit Profiles"
     ]
-  },
-  {
-    "objectID": "pages/managing-jobs.html",
-    "href": "pages/managing-jobs.html",
-    "title": "Managing Jobs",
-    "section": "",
-    "text": "slurm-code provides commands to list, cancel, and reconnect to jobs that were submitted through slurm-code submit. These commands identify managed jobs by their sc- name prefix."
-  },
-  {
-    "objectID": "pages/managing-jobs.html#listing-jobs",
-    "href": "pages/managing-jobs.html#listing-jobs",
-    "title": "Managing Jobs",
-    "section": "Listing jobs",
-    "text": "Listing jobs\nThe jobs command shows your running slurm-code jobs:\nslurm-code jobs\nExample output:\n     JOBID  NAME                            PARTITION     REQMEM    CPUS    TIMELIMIT     ELAPSED       STATE\n----------------------------------------------------------------------------------------------------------\n   1234567  sc-my-project                   normal        8Gn       1       08:00:00      01:23:45      RUNNING\n   1234568  sc-analysis                     normal        16Gn      4       12:00:00      00:45:12      RUNNING\n\nOptions\n\n\n\nOption\nDescription\n\n\n\n\n--all-states\nInclude PENDING jobs (default: RUNNING only)\n\n\n\nTo also see pending jobs:\nslurm-code jobs --all-states"
-  },
-  {
-    "objectID": "pages/managing-jobs.html#cancelling-jobs",
-    "href": "pages/managing-jobs.html#cancelling-jobs",
-    "title": "Managing Jobs",
-    "section": "Cancelling jobs",
-    "text": "Cancelling jobs\nThe cancel command cancels slurm-code managed jobs.\n\nCancel by job ID\nslurm-code cancel 1234567\n\n\nCancel by name\nYou can use the directory basename (without the sc- prefix):\nslurm-code cancel my-project\nOr the full job name:\nslurm-code cancel sc-my-project\n\n\nCancel all jobs\nslurm-code cancel --all\n\n\nOptions\n\n\n\nArgument/Option\nDescription\n\n\n\n\nJOB_ID_OR_NAME\nA job ID (numeric) or job name to cancel\n\n\n--all\nCancel all slurm-code managed jobs"
-  },
-  {
-    "objectID": "pages/managing-jobs.html#reconnecting-to-a-job",
-    "href": "pages/managing-jobs.html#reconnecting-to-a-job",
-    "title": "Managing Jobs",
-    "section": "Reconnecting to a job",
-    "text": "Reconnecting to a job\nIf VSCode disconnects or you close the window, use reconnect to reopen it on the same node:\nslurm-code reconnect ~/my-project\nThis finds the running job that matches the directory name and opens VSCode on its allocated node. Relative paths are resolved relative to $HOME.\nIf multiple jobs match the directory name, you’ll be prompted to select one:\nMultiple matching jobs found:\n  [1] 1234567  01:23:45  RUNNING\n  [2] 1234568  00:45:12  RUNNING\nSelect job number:\n\nUsage\nslurm-code reconnect DIRECTORY\n\n\n\nArgument\nDescription\n\n\n\n\nDIRECTORY\nPath on the remote host (used to match the job name)"
   }
 ]
